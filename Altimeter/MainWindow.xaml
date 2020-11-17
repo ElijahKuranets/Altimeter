@@ -55,6 +55,51 @@
         </Rectangle>
         <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
             <Rectangle.RenderTransform>
+                <RotateTransform Angle="45"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
+            <Rectangle.RenderTransform>
+                <RotateTransform Angle="50"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
+            <Rectangle.RenderTransform>
+                <RotateTransform Angle="55"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
+            <Rectangle.RenderTransform>
+                <RotateTransform Angle="60"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
+            <Rectangle.RenderTransform>
+                <RotateTransform Angle="65"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
+            <Rectangle.RenderTransform>
+                <RotateTransform Angle="70"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
+            <Rectangle.RenderTransform>
+                <RotateTransform Angle="75"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
+            <Rectangle.RenderTransform>
+                <RotateTransform Angle="80"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
+            <Rectangle.RenderTransform>
+                <RotateTransform Angle="85"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
+            <Rectangle.RenderTransform>
                 <RotateTransform Angle="90"/>
             </Rectangle.RenderTransform>
         </Rectangle>
