@@ -1,0 +1,5 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <FontFamily x:Key="B612">/UI.WPFCore;component/Fonts/B612/#B612</FontFamily>
+    <FontFamily x:Key="B612Mono">/UI.WPFCore;component/Fonts/B612Mono/#B612 Mono</FontFamily>
+</ResourceDictionary>

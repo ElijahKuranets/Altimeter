@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30709.132
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altimeter", "Altimeter\Altimeter.csproj", "{C0F32ED6-61B8-4A82-978F-C6AC331A2A78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altimeter", "Altimeter\Altimeter.csproj", "{C0F32ED6-61B8-4A82-978F-C6AC331A2A78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.WPFCore", "UI.WPFCore\UI.WPFCore.csproj", "{85C61DFC-F316-441D-B64C-62A0682C384A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C0F32ED6-61B8-4A82-978F-C6AC331A2A78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0F32ED6-61B8-4A82-978F-C6AC331A2A78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0F32ED6-61B8-4A82-978F-C6AC331A2A78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85C61DFC-F316-441D-B64C-62A0682C384A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85C61DFC-F316-441D-B64C-62A0682C384A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85C61DFC-F316-441D-B64C-62A0682C384A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85C61DFC-F316-441D-B64C-62A0682C384A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

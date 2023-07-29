@@ -1,0 +1,181 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:theme="clr-namespace:UI.WPFCore">
+
+    <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=Body3FontColor}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="{theme:ThemeResource ResourceKey=Body3FontFamily}" />
+        <Setter Property="FontSize" Value="{theme:ThemeResource ResourceKey=Body3FontSize}" />
+        <Setter Property="FontWeight" Value="{theme:ThemeResource ResourceKey=Body3FontWeight}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Width" Value="Auto" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Label}">
+                    <Border x:Name="border"
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="3"
+                        SnapsToDevicePixels="true">
+                        <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            RecognizesAccessKey="True"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style BasedOn="{StaticResource LabelStyle}" TargetType="{x:Type Label}" />
+
+    <Style x:Key="LabelStyleH1" BasedOn="{StaticResource LabelStyle}" TargetType="{x:Type Label}">
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=H1FontColor}" />
+        <Setter Property="FontFamily" Value="{theme:ThemeResource ResourceKey=H1FontFamily}" />
+        <Setter Property="FontSize" Value="{theme:ThemeResource ResourceKey=H1FontSize}" />
+        <Setter Property="FontWeight" Value="{theme:ThemeResource ResourceKey=H1FontWeight}" />
+    </Style>
+
+    <Style x:Key="LabelStyleH2" BasedOn="{StaticResource LabelStyle}" TargetType="{x:Type Label}">
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=H2FontColor}" />
+        <Setter Property="FontFamily" Value="{theme:ThemeResource ResourceKey=H2FontFamily}" />
+        <Setter Property="FontSize" Value="{theme:ThemeResource ResourceKey=H2FontSize}" />
+        <Setter Property="FontWeight" Value="{theme:ThemeResource ResourceKey=H2FontWeight}" />
+    </Style>
+
+    <Style x:Key="LabelStyleH3" BasedOn="{StaticResource LabelStyle}" TargetType="{x:Type Label}">
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=H3FontColor}" />
+        <Setter Property="FontFamily" Value="{theme:ThemeResource ResourceKey=H3FontFamily}" />
+        <Setter Property="FontSize" Value="{theme:ThemeResource ResourceKey=H3FontSize}" />
+        <Setter Property="FontWeight" Value="{theme:ThemeResource ResourceKey=H3FontWeight}" />
+    </Style>
+
+    <Style x:Key="LabelStyleH4" BasedOn="{StaticResource LabelStyle}" TargetType="{x:Type Label}">
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=H4FontColor}" />
+        <Setter Property="FontFamily" Value="{theme:ThemeResource ResourceKey=H3FontFamily}" />
+        <Setter Property="FontSize" Value="{theme:ThemeResource ResourceKey=H3FontSize}" />
+        <Setter Property="FontWeight" Value="{theme:ThemeResource ResourceKey=H3FontWeight}" />
+    </Style>
+
+    <Style x:Key="LabelStyleBody1" BasedOn="{StaticResource LabelStyle}" TargetType="{x:Type Label}">
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=Body1FontColor}" />
+        <Setter Property="FontFamily" Value="{theme:ThemeResource ResourceKey=Body1FontFamily}" />
+        <Setter Property="FontSize" Value="{theme:ThemeResource ResourceKey=Body1FontSize}" />
+        <Setter Property="FontWeight" Value="{theme:ThemeResource ResourceKey=Body1FontWeight}" />
+    </Style>
+
+    <Style x:Key="LabelStyleBody2" BasedOn="{StaticResource LabelStyle}" TargetType="{x:Type Label}">
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=Body2FontColor}" />
+        <Setter Property="FontFamily" Value="{theme:ThemeResource ResourceKey=Body2FontFamily}" />
+        <Setter Property="FontSize" Value="{theme:ThemeResource ResourceKey=Body2FontSize}" />
+        <Setter Property="FontWeight" Value="{theme:ThemeResource ResourceKey=Body2FontWeight}" />
+    </Style>
+
+    <Style x:Key="LabelStyleValues1" BasedOn="{StaticResource LabelStyle}" TargetType="{x:Type Label}">
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=Values1FontColor}" />
+        <Setter Property="FontFamily" Value="{theme:ThemeResource ResourceKey=Values1FontFamily}" />
+        <Setter Property="FontSize" Value="{theme:ThemeResource ResourceKey=Values1FontSize}" />
+        <Setter Property="FontWeight" Value="{theme:ThemeResource ResourceKey=Values1FontWeight}" />
+    </Style>
+
+    <Style x:Key="LabelStyleValues2" BasedOn="{StaticResource LabelStyle}" TargetType="{x:Type Label}">
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=Values2FontColor}" />
+        <Setter Property="FontFamily" Value="{theme:ThemeResource ResourceKey=Values2FontFamily}" />
+        <Setter Property="FontSize" Value="{theme:ThemeResource ResourceKey=Values2FontSize}" />
+        <Setter Property="FontWeight" Value="{theme:ThemeResource ResourceKey=Values2FontWeight}" />
+    </Style>
+
+    <Style x:Key="LabelStyleDynamicValues1" BasedOn="{StaticResource LabelStyleValues1}" TargetType="{x:Type Label}">
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=DynamicTextColor}" />
+    </Style>
+
+    <Style x:Key="LabelStyleDynamicValues2" BasedOn="{StaticResource LabelStyleValues2}" TargetType="{x:Type Label}">
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=DynamicTextColor}" />
+    </Style>
+
+    <!--  Label with a gray border  -->
+    <Style x:Key="LabelStyleStatus" BasedOn="{StaticResource LabelStyleH1}" TargetType="{x:Type Label}">
+        <Setter Property="Height" Value="{theme:ThemeResource ResourceKey=DefaultControlHeight}" />
+        <Setter Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush9}" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="Width" Value="{theme:ThemeResource ResourceKey=DefaultControlWidth}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="Padding" Value="0,3,0,0" />
+    </Style>
+
+    <!--  Label with a gray border and dynamic text  -->
+    <Style x:Key="LabelStyleDynamicStatus" BasedOn="{StaticResource LabelStyleStatus}" TargetType="{x:Type Label}">
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=DynamicTextColor}" />
+        <Setter Property="FontFamily" Value="{theme:ThemeResource ResourceKey=Values2FontFamily}" />
+        <Setter Property="FontSize" Value="{theme:ThemeResource ResourceKey=Values2FontSize}" />
+        <Setter Property="FontWeight" Value="{theme:ThemeResource ResourceKey=Values2FontWeight}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="LabelStyleSmallDynamicStatus" BasedOn="{StaticResource LabelStyleDynamicStatus}" TargetType="{x:Type Label}">
+        <Setter Property="Width" Value="{theme:ThemeResource ResourceKey=DefaultSmallControlWidth}" />
+    </Style>
+
+    <!--  Label with a yellow border  -->
+    <Style x:Key="LabelStyleStatusReady" BasedOn="{StaticResource LabelStyleStatus}" TargetType="{x:Type Label}">
+        <Setter Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=SecondaryColorBrush3}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+
+    <!--  Label with a red border  -->
+    <Style x:Key="LabelStyleStatusError" BasedOn="{StaticResource LabelStyleStatus}" TargetType="{x:Type Label}">
+        <Setter Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=SecondaryColorBrush4}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <!--  Label with a green border  -->
+    <Style x:Key="LabelStyleStatusOk" BasedOn="{StaticResource LabelStyleStatus}" TargetType="{x:Type Label}">
+        <Setter Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=SecondaryColorBrush2}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <!--  Label with a blue border  -->
+    <Style x:Key="LabelStyleStatusInfo" BasedOn="{StaticResource LabelStyleStatus}" TargetType="{x:Type Label}">
+        <Setter Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=SecondaryColorBrush1}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <Style x:Key="LabelStyleFlagActive" BasedOn="{StaticResource LabelStyleStatus}" TargetType="{x:Type Label}">
+        <Setter Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=H2FontColor}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=H2FontColor}" />
+        <Setter Property="FontFamily" Value="{theme:ThemeResource ResourceKey=H2FontFamily}" />
+        <Setter Property="FontSize" Value="{theme:ThemeResource ResourceKey=H2FontSize}" />
+        <Setter Property="Width" Value="{theme:ThemeResource ResourceKey=DefaultSmallControlWidth}" />
+        <Setter Property="Height" Value="25" />
+    </Style>
+
+    <Style x:Key="LabelStyleFlagInactive" BasedOn="{StaticResource LabelStyleFlagActive}" TargetType="{x:Type Label}">
+        <Setter Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=FlagColorBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=FlagColorBrush}" />
+    </Style>
+
+    <Style x:Key="LabelStyleFlagInactiveLarge" BasedOn="{StaticResource LabelStyleFlagInactive}" TargetType="{x:Type Label}">
+        <Setter Property="Width" Value="60" />
+    </Style>
+
+    <Style x:Key="LabelStyleFlagActiveLarge" BasedOn="{StaticResource LabelStyleFlagActive}" TargetType="{x:Type Label}">
+        <Setter Property="Width" Value="60" />
+    </Style>
+
+</ResourceDictionary>

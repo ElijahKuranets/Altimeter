@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
+using UI.WPFCore;
 
 namespace Altimeter.Controls
 {
@@ -68,7 +69,7 @@ namespace Altimeter.Controls
 
         private void DrawMetricScale()
         {
-            var lineBrush = new SolidColorBrush(Colors.AntiqueWhite);
+            var lineBrush = Theme.GetResource(ThemeResourceKey.PrimaryColorBrush2) as SolidColorBrush;
 
             var width = Altimeter.Width;
             var height = Altimeter.Height;
@@ -122,7 +123,8 @@ namespace Altimeter.Controls
                 {
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
-                    Content = i.ToString()
+                    Content = i.ToString(),
+                    Style = (Style)FindResource("LabelStyleBody1")
                 };
                 border.LayoutTransform = new RotateTransform(-angle, 0, 0);
                 border.Child = label;

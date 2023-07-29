@@ -6,4 +6,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\UI.WPFCore\UI.WPFCore.csproj" />
+  </ItemGroup>
+
 </Project>
