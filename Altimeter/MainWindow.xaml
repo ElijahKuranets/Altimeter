@@ -3,106 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Altimeter"
+        xmlns:controls="clr-namespace:Altimeter.Controls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Border BorderThickness="10" BorderBrush="Black" CornerRadius="300" Width="420" Height="420"></Border>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="0"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="5"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="10"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="15"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="20"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="25"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="30"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="35"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="40"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="45"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="50"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="55"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="60"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="65"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="70"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="75"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="80"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="85"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="5" Fill="DarkSlateBlue" RenderTransformOrigin=".5,.5">
-            <Rectangle.RenderTransform>
-                <RotateTransform Angle="90"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-
+        <Border
+            BorderBrush="SteelBlue"
+            BorderThickness="1">
+            <controls:AltimeterUserControl AltimeterWidth="370" AltimeterHeight="370" AltitudeValue="1500"></controls:AltimeterUserControl>
+        </Border>
     </Grid>
 </Window>
