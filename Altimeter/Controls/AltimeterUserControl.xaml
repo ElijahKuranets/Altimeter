@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Altimeter.Controls"
 			 xmlns:gui="clr-namespace:UI.WPFCore;assembly=UI.WPFCore"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="{gui:ThemeResource ResourceKey=PrimaryColorBrush8}">
+             d:DesignHeight="450" d:DesignWidth="450">
     <Viewbox
         Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:AltimeterUserControl}}, Path=AltimeterWidth}"
         Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:AltimeterUserControl}}, Path=AltimeterHeight}"

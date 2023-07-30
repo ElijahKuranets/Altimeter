@@ -115,7 +115,7 @@ namespace Altimeter.Controls
                 Canvas.SetLeft(border, weight / 2);
 
                 var transformGroup = new TransformGroup();
-                transformGroup.Children.Add(new TranslateTransform(-11, 16));
+                transformGroup.Children.Add(new TranslateTransform(-MaxMark, 16));
                 transformGroup.Children.Add(new RotateTransform(angle, 0, weight / 2));
                 border.RenderTransform = transformGroup;
 
@@ -124,8 +124,8 @@ namespace Altimeter.Controls
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     Content = i.ToString(),
-                    Style = (Style)FindResource("LabelStyleBody1")
-                };
+                    Style = (Style)FindResource("LabelStyleBody1"),
+            };
                 border.LayoutTransform = new RotateTransform(-angle, 0, 0);
                 border.Child = label;
 
