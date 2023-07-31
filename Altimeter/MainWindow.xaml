@@ -5,13 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:gui="clr-namespace:UI.WPFCore;assembly=UI.WPFCore"
         xmlns:controls="clr-namespace:Altimeter.Controls"
-        mc:Ignorable="d"
-        Title="MainWindow">
+        Title="Styles"
+        Width="500"
+        Height="500"
+        Margin="20"
+        Padding="20"
+        Style="{DynamicResource ResourceKey=MainWindowStyle}">
     <Grid Background="{gui:ThemeResource ResourceKey=PrimaryColorBrush8}">
         <Viewbox>
             <Border><!--BorderBrush="SteelBlue"
             BorderThickness="1"-->
                 <controls:AltimeterUserControl AltimeterWidth="370" AltimeterHeight="370" AltitudeValue="0"></controls:AltimeterUserControl>
+                <!--<gui:WindowStyles></gui:WindowStyles>-->
             </Border>
         </Viewbox>
     </Grid>

@@ -6,6 +6,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/UI.WPFCore;component/Themes/UI.WPF.xaml" />
+                <ResourceDictionary Source="/UI.WPFCore;component/Themes/Styles/WindowStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
