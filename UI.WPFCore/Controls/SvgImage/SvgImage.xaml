@@ -1,0 +1,18 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gui="clr-namespace:UI.WPFCore.Controls">
+
+    <ControlTemplate x:Key="DI_Image" TargetType="{x:Type gui:SvgImage}">
+        <Border
+            Width="{TemplateBinding Width}"
+            Height="{TemplateBinding Height}">
+            <Image>
+                <Image.Source>
+                    <DrawingImage Drawing="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SvgDrawing}" />
+                </Image.Source>
+            </Image>
+        </Border>
+    </ControlTemplate>
+
+</ResourceDictionary>

@@ -1,0 +1,420 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ap="clr-namespace:UI.WPFCore.AttachedProperties"
+    xmlns:controls="clr-namespace:UI.WPFCore.Controls"
+    xmlns:theme="clr-namespace:UI.WPFCore">
+
+    <!--<Style x:Key="DropShadowEffectStyle" x:Name="DropShadowEffectStyle" TargetType="DropShadowEffect">
+        <Setter Property="BlurRadius" Value="5" />
+        <Setter Property="Direction" Value="315" />
+        <Setter Property="ShadowDepth" Value="2" />
+        <Setter Property="Opacity" Value="0.5" />
+    </Style>-->
+
+    <Style x:Key="FocusVisual" TargetType="{x:Type Control}">
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=SecondaryColorBrush1}" />
+        <Setter Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=SecondaryColorBrush1}" />
+    </Style>
+
+    <Style x:Key="HyperlinkLikeButton" TargetType="{x:Type Control}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <ContentPresenter />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush3}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Style.Triggers>
+            <Trigger
+                Property="Button.IsFocused"
+                Value="true">
+                <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush1}" />
+                <Setter Property="Control.FontWeight" Value="Bold" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <ControlTemplate.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="TextDecorations" Value="Underline" />
+                                </Style>
+                            </ControlTemplate.Resources>
+                            <ContentPresenter />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="HyperlinkLikeRadioButton" TargetType="RadioButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <ContentPresenter />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush3}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FontFamily" Value="{theme:ThemeResource ResourceKey=Body1FontFamily}" />
+        <Setter Property="FontSize" Value="{theme:ThemeResource ResourceKey=H1FontSize}" />
+        <Style.Triggers>
+            <Trigger
+                Property="RadioButton.IsChecked"
+                Value="true">
+                <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush1}" />
+                <Setter Property="Control.FontWeight" Value="Bold" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RadioButton">
+                            <ControlTemplate.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="TextDecorations" Value="Underline" />
+                                </Style>
+                            </ControlTemplate.Resources>
+                            <ContentPresenter />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type Button}">
+        <Grid SnapsToDevicePixels="true">
+            <Border x:Name="border"
+                Width="{TemplateBinding Width}"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(ap:ButtonProperties.CornerRadius)}"
+                SnapsToDevicePixels="true">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="3"
+                        Direction="270"
+                        Opacity="0.5"
+                        ShadowDepth="3"
+                        Color="Black" />
+                </Border.Effect>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="leftCol"
+                            Width="*" />
+                        <ColumnDefinition x:Name="rightCol"
+                            Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <ContentPresenter x:Name="contentPresenter"
+                        Grid.Column="0"
+                        Margin="{TemplateBinding Padding}"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        Focusable="False"
+                        RecognizesAccessKey="True"
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                    <controls:XamlImage x:Name="icon"
+                        Grid.Column="1"
+                        Width="14"
+                        Height="14"
+                        Margin="11,9,11,8"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Foreground="{TemplateBinding Foreground}"
+                        Template="{TemplateBinding ap:ButtonProperties.Icon}" />
+                </Grid>
+            </Border>
+            <Border x:Name="FocusBorder"
+                BorderBrush="{theme:ThemeResource ResourceKey=PrimaryColorBrush1}"
+                BorderThickness="1"
+                CornerRadius="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(ap:ButtonProperties.CornerRadius)}"
+                Visibility="Collapsed" />
+
+        </Grid>
+        <ControlTemplate.Triggers>
+            <DataTrigger
+                Binding="{Binding Path=(ap:ButtonProperties.Icon), RelativeSource={RelativeSource Self}}"
+                Value="{x:Null}">
+                <Setter TargetName="rightCol" Property="Width" Value="0" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="Padding" Value="1" />
+            </DataTrigger>
+            <Trigger
+                Property="Content"
+                Value="{x:Null}">
+                <Setter TargetName="leftCol" Property="Width" Value="0" />
+                <Setter TargetName="rightCol" Property="Width" Value="*" />
+                <Setter TargetName="icon" Property="HorizontalAlignment" Value="Center" />
+                <Setter TargetName="icon" Property="Margin" Value="11,9,11,8" />
+            </Trigger>
+            <Trigger
+                Property="IsDefaulted"
+                Value="true">
+                <Setter TargetName="border" Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush1}" />
+            </Trigger>
+            <Trigger
+                Property="IsMouseOver"
+                Value="true">
+                <Setter TargetName="border" Property="Background" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush4}" />
+                <Setter TargetName="border" Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush3}" />
+            </Trigger>
+            <Trigger
+                Property="IsKeyboardFocused"
+                Value="true">
+                <Setter TargetName="border" Property="Background" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush6}" />
+                <Setter TargetName="border" Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=SecondaryColorBrush1}" />
+                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{theme:ThemeResource ResourceKey=SecondaryColorBrush1}" />
+            </Trigger>
+            <Trigger
+                Property="IsPressed"
+                Value="true">
+                <Setter TargetName="border" Property="Background" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush10}" />
+                <Setter TargetName="border" Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush10}" />
+                <Setter TargetName="border" Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect ShadowDepth="0" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger
+                Property="IsEnabled"
+                Value="false">
+                <Setter TargetName="border" Property="Background" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush7}" />
+                <Setter TargetName="border" Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush7}" />
+                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush5}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--
+        Default Button, Button1 style
+    -->
+    <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="{theme:ThemeResource ResourceKey=DefaultControlHeight}" />
+        <Setter Property="Width" Value="{theme:ThemeResource ResourceKey=DefaultControlWidth}" />
+        <Setter Property="ap:ButtonProperties.CornerRadius" Value="3" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="Background" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush5}" />
+        <Setter Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush4}" />
+        <Setter Property="Focusable" Value="False"/>
+
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=Button1FontColor}" />
+        <Setter Property="FontFamily" Value="{theme:ThemeResource ResourceKey=Button1FontFamily}" />
+        <Setter Property="FontWeight" Value="{theme:ThemeResource ResourceKey=Button1FontWeight}" />
+        <Setter Property="FontSize" Value="{theme:ThemeResource ResourceKey=Button1FontSize}" />
+
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="10,7,1,7" />
+        <Setter Property="Template" Value="{StaticResource ButtonTemplate}" />
+    </Style>
+
+    <Style x:Key="NonFixedButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="{theme:ThemeResource ResourceKey=DefaultControlHeight}" />
+        <Setter Property="ap:ButtonProperties.CornerRadius" Value="3" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="Background" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush5}" />
+        <Setter Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush4}" />
+        <Setter Property="Focusable" Value="False"/>
+
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=Button1FontColor}" />
+        <Setter Property="FontFamily" Value="{theme:ThemeResource ResourceKey=Button1FontFamily}" />
+        <Setter Property="FontWeight" Value="{theme:ThemeResource ResourceKey=Button1FontWeight}" />
+        <Setter Property="FontSize" Value="{theme:ThemeResource ResourceKey=Button1FontSize}" />
+
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="10,7,1,7" />
+        <Setter Property="Template" Value="{StaticResource ButtonTemplate}" />
+    </Style>
+
+    <!--  Set default button styling  -->
+    <Style BasedOn="{StaticResource ButtonStyle}" TargetType="{x:Type Button}" />
+
+    <!--  Button2 Style  -->
+    <Style x:Key="Button2Style" BasedOn="{StaticResource ButtonStyle}" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=Button2FontColor}" />
+        <Setter Property="FontFamily" Value="{theme:ThemeResource ResourceKey=Button2FontFamily}" />
+        <Setter Property="FontWeight" Value="{theme:ThemeResource ResourceKey=Button2FontWeight}" />
+        <Setter Property="FontSize" Value="{theme:ThemeResource ResourceKey=Button2FontSize}" />
+    </Style>
+
+    <!--  Small button  -->
+    <Style x:Key="SmallButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="{theme:ThemeResource ResourceKey=DefaultSmallControlWidth}" />
+    </Style>
+
+    <Style x:Key="ImageButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="Auto" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+
+
+    <!--  Large button  -->
+    <Style x:Key="LargeButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="{theme:ThemeResource ResourceKey=DefaultLargeControlWidth}" />
+    </Style>
+
+    <Style x:Key="ArrowButtonStyle" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" TargetType="Button">
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Width" Value="35" />
+        <Setter Property="Height" Value="35" />
+    </Style>
+    <Style x:Key="ArrowIconButtonStyle" TargetType="Path">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Data" Value="F1 M 287.328,237.333L 319.344,255.818L 319.344,218.849L 287.328,237.333 Z " />
+        <Setter Property="Fill" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush3}" />
+        <Setter Property="Width" Value="5" />
+        <Setter Property="Height" Value="10" />
+        <Setter Property="Stretch" Value="Fill" />
+        <Setter Property="RenderTransformOrigin" Value="0.5, 0.5" />
+    </Style>
+    <Style x:Key="ArrowLeftIconButtonStyle" BasedOn="{StaticResource ArrowIconButtonStyle}" TargetType="Path" />
+    <Style x:Key="ArrowRightIconButtonStyle" BasedOn="{StaticResource ArrowIconButtonStyle}" TargetType="Path">
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <RotateTransform Angle="180" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ArrowTopIconButtonStyle" BasedOn="{StaticResource ArrowIconButtonStyle}" TargetType="Path">
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <RotateTransform Angle="90" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ArrowBottomIconButtonStyle" BasedOn="{StaticResource ArrowIconButtonStyle}" TargetType="Path">
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <RotateTransform Angle="-90" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <ControlTemplate x:Key="DarkButtonTemplate" TargetType="{x:Type Button}">
+        <Grid SnapsToDevicePixels="true">
+            <Border x:Name="border"
+                Width="{TemplateBinding Width}"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(ap:ButtonProperties.CornerRadius)}"
+                SnapsToDevicePixels="true">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="leftCol"
+                            Width="*" />
+                        <ColumnDefinition x:Name="rightCol"
+                            Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <ContentPresenter x:Name="contentPresenter"
+                        Grid.Column="0"
+                        Margin="{TemplateBinding Padding}"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        Focusable="False"
+                        RecognizesAccessKey="True"
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                    <controls:XamlImage x:Name="icon"
+                        Grid.Column="1"
+                        Width="20"
+                        Height="20"
+                        Margin="8"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Foreground="{TemplateBinding Foreground}"
+                        Template="{TemplateBinding ap:ButtonProperties.Icon}" />
+                </Grid>
+            </Border>
+            <Border x:Name="FocusBorder"
+                BorderBrush="{theme:ThemeResource ResourceKey=PrimaryColorBrush1}"
+                BorderThickness="1"
+                CornerRadius="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(ap:ButtonProperties.CornerRadius)}"
+                Visibility="Collapsed" />
+
+        </Grid>
+        <ControlTemplate.Triggers>
+            <DataTrigger
+                Binding="{Binding Path=(ap:ButtonProperties.Icon), RelativeSource={RelativeSource Self}}"
+                Value="{x:Null}">
+                <Setter TargetName="rightCol" Property="Width" Value="0" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="Padding" Value="1" />
+            </DataTrigger>
+            <Trigger
+                Property="Content"
+                Value="{x:Null}">
+                <Setter TargetName="leftCol" Property="Width" Value="0" />
+                <Setter TargetName="rightCol" Property="Width" Value="*" />
+                <Setter TargetName="icon" Property="HorizontalAlignment" Value="Center" />
+                <Setter TargetName="icon" Property="Margin" Value="8" />
+            </Trigger>
+            <Trigger
+                Property="IsDefaulted"
+                Value="true">
+                <Setter TargetName="border" Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush1}" />
+            </Trigger>
+            <Trigger
+                Property="IsMouseOver"
+                Value="true">
+                <Setter TargetName="border" Property="Background" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush10}" />
+                <Setter TargetName="border" Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush7}" />
+            </Trigger>
+            <Trigger
+                Property="IsKeyboardFocused"
+                Value="true">
+                <Setter TargetName="border" Property="Background" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush10}" />
+                <Setter TargetName="border" Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=SecondaryColorBrush1}" />
+            </Trigger>
+            <Trigger
+                Property="IsPressed"
+                Value="true">
+                <Setter TargetName="border" Property="Background" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush10}" />
+                <Setter TargetName="border" Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush10}" />
+                <Setter TargetName="border" Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect ShadowDepth="0" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger
+                Property="IsEnabled"
+                Value="false">
+                <Setter TargetName="border" Property="Background" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush7}" />
+                <Setter TargetName="border" Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush7}" />
+                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush5}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="DarkButtonStyle" BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+        <Setter Property="ap:ButtonProperties.CornerRadius" Value="3" />
+        <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=Button1FontColor}" />
+        <Setter Property="FontFamily" Value="{theme:ThemeResource ResourceKey=Button1FontFamily}" />
+        <Setter Property="FontWeight" Value="{theme:ThemeResource ResourceKey=Button1FontWeight}" />
+        <Setter Property="FontSize" Value="{theme:ThemeResource ResourceKey=Button1FontSize}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Width" Value="184" />
+        <Setter Property="Height" Value="{theme:ThemeResource ResourceKey=DefaultControlHeight}" />
+        <Setter Property="Template" Value="{StaticResource DarkButtonTemplate}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Background" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush9}" />
+        <Setter Property="BorderBrush" Value="{theme:ThemeResource ResourceKey=PrimaryColorBrush9}" />
+    </Style>
+
+</ResourceDictionary>

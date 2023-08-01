@@ -72,7 +72,7 @@
                                     Height="8"
                                     Template="{DynamicResource Icon_Close}" />
                             </Button>
-                            <!--<Button x:Name="MaximizeRestoreButton"
+                            <Button x:Name="MaximizeRestoreButton"
                                 Margin="4,0,0,0"
                                 Click="OnMaximizeRestoreClick"
                                 DockPanel.Dock="Right"
@@ -81,8 +81,8 @@
                                     Width="8"
                                     Height="8"
                                     Template="{DynamicResource Icon_Maximize}" />
-                            </Button>-->
-                            <!--<Button x:Name="MinimizeButton2"
+                            </Button>
+                            <Button x:Name="MinimizeButton2"
                                 Margin="4,0,0,0"
                                 Click="OnMinimizeClick"
                                 DockPanel.Dock="Right"
@@ -91,10 +91,9 @@
                                     Width="8"
                                     Height="8"
                                     Template="{DynamicResource Icon_Minimize}" />
-                            </Button>-->
+                            </Button>
                             <Button x:Name="ThemeButton"
                                 Click="OnThemeClick"
-                                MouseDoubleClick="ThemeButton_MouseDoubleClick"
                                 DockPanel.Dock="Right"
                                 Style="{DynamicResource WindowButtonStyle}">
                                 <controls:XamlImage
@@ -103,7 +102,7 @@
                                     Template="{DynamicResource Icon_Theme}" />
                             </Button>
 
-                            <!--<Button x:Name="ResizeToHdButton"
+                            <Button x:Name="ResizeToHdButton"
                                 Click="OnResizeToHdButtonClick"
                                 DockPanel.Dock="Right"
                                 Style="{DynamicResource WindowButtonStyle}">
@@ -111,7 +110,7 @@
                                     Width="8"
                                     Height="8"
                                     Template="{DynamicResource Icon_resize}" />
-                            </Button>-->
+                            </Button>
 
                             <Rectangle
                                 Width="1"

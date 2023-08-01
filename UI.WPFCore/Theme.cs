@@ -7,7 +7,7 @@ namespace UI.WPFCore
     public sealed class Theme
     {
         [ThreadStatic]
-        private static ResourceDictionary resourceDictionary;
+        private static ResourceDictionary? resourceDictionary;
 
         internal static ResourceDictionary ResourceDictionary
         {
@@ -207,8 +207,10 @@ namespace UI.WPFCore
 
             //Connect fonts from resources. TTF files are placed in two folders. Fonts/B612 is folder for B612 fontfamily, Fonts/B612Mono is folder for B612 mono.
             //The FontFamolies are created in Themes/Fonts/Fonts.xaml resource dictionary
-            var fontsResourceDictionary = new ResourceDictionary();
-            fontsResourceDictionary.Source = new Uri("/UI.WPFCore;component/Themes/Fonts.xaml", UriKind.RelativeOrAbsolute);
+            var fontsResourceDictionary = new ResourceDictionary
+            {
+                Source = new Uri("/UI.WPFCore;component/Themes/Fonts.xaml", UriKind.RelativeOrAbsolute)
+            };
             var b612 = fontsResourceDictionary["B612"] as FontFamily;
             SetResource(ThemeResourceKey.DefaultFontFamily.ToString(), b612);
             var b612Mono = fontsResourceDictionary["B612Mono"] as FontFamily;

@@ -3,5 +3,7 @@
     <ResourceDictionary.MergedDictionaries>
         <gui:ThemeResourceDictionary />
         <ResourceDictionary Source="Styles/LabelStyles.xaml" />
+        <ResourceDictionary Source="Styles/ButtonStyles.xaml" />
+        <ResourceDictionary Source="./../Controls/SvgImage/SvgImage.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
