@@ -1,0 +1,39 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:theme="clr-namespace:UI.WPFCore">
+
+    <Style x:Key="PathStyle" TargetType="{x:Type Path}">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Width" Value="Auto" />
+    </Style>
+    <Style BasedOn="{StaticResource PathStyle}" TargetType="{x:Type Path}" />
+
+    <Style x:Key="PathStyleH4" BasedOn="{StaticResource PathStyle}" TargetType="{x:Type Path}">
+        <Setter Property="Fill" Value="{theme:ThemeResource ResourceKey=H4FontColor}" />
+    </Style>
+
+    <Style x:Key="PathStyleBody1" BasedOn="{StaticResource PathStyle}" TargetType="{x:Type Path}">
+        <Setter Property="Fill" Value="{theme:ThemeResource ResourceKey=Body1FontColor}" />
+    </Style>
+
+    <Style x:Key="PathStyleBody2" BasedOn="{StaticResource PathStyle}" TargetType="{x:Type Path}">
+        <Setter Property="Fill" Value="{theme:ThemeResource ResourceKey=Body2FontColor}" />
+    </Style>
+
+    <Style x:Key="PathStyleValues1" BasedOn="{StaticResource PathStyle}" TargetType="{x:Type Path}">
+        <Setter Property="Fill" Value="{theme:ThemeResource ResourceKey=Values1FontColor}" />
+    </Style>
+
+    <Style x:Key="PathStyleValues2" BasedOn="{StaticResource PathStyle}" TargetType="{x:Type Path}">
+        <Setter Property="Fill" Value="{theme:ThemeResource ResourceKey=Values2FontColor}" />
+    </Style>
+
+    <Style x:Key="PathStyleDynamicValues1" BasedOn="{StaticResource PathStyleValues1}" TargetType="{x:Type Path}">
+        <!--<Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=DynamicTextColor}" />-->
+    </Style>
+
+    <Style x:Key="PathStyleDynamicValues2" BasedOn="{StaticResource PathStyleValues2}" TargetType="{x:Type Path}">
+        <!--<Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=DynamicTextColor}" />-->
+    </Style>
+</ResourceDictionary>

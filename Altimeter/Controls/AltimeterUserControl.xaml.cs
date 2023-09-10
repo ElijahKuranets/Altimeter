@@ -94,8 +94,8 @@ namespace Altimeter.Controls
                     X2 = w / 6.7 + longLine,
                     Y2 = w / 6.7 + longLine,
                     StrokeThickness = 1,
-                    Stroke = lineBrush,
                     RenderTransform = trace,
+                    Style = (Style)FindResource("LineStyleBody1")
                 };
                 Altimeter.Children.Add(line);
             }
@@ -165,7 +165,6 @@ namespace Altimeter.Controls
                 Name = "smallHand",
                 Width = 250,
                 Height = 250,
-                Fill = lineBrush,
                 StrokeThickness = 1,
                 Data = pathGeometry,
                 Effect = new DropShadowEffect
@@ -173,7 +172,8 @@ namespace Altimeter.Controls
                     BlurRadius = 10,
                     Opacity = 0.5,
                     ShadowDepth = 1
-                }
+                },
+                Style = (Style)FindResource("PathStyleBody1")
             };
 
             Altimeter.Children.Add(_smallHandPath);
@@ -215,7 +215,6 @@ namespace Altimeter.Controls
                 Name = "bigHand",
                 Width = 250,
                 Height = 250,
-                Fill = lineBrush,
                 StrokeThickness = 1,
                 Data = pathGeometry,
                 Effect = new DropShadowEffect
@@ -223,7 +222,8 @@ namespace Altimeter.Controls
                     BlurRadius = 10,
                     Opacity = 0.5,
                     ShadowDepth = 1
-                }
+                },
+                Style = (Style)FindResource("PathStyleBody1"),
             };
 
             Altimeter.Children.Add(_bigHandPath);

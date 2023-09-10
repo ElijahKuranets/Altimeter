@@ -90,5 +90,10 @@ namespace UI.WPFCore
             }
             catch { }
         }
+
+        private void ThemeButton_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

@@ -8,6 +8,8 @@
                 <ResourceDictionary Source="/UI.WPFCore;component/Themes/UI.WPF.xaml" />
                 <ResourceDictionary Source="/UI.WPFCore;component/Themes/Styles/WindowStyles.xaml" />
                 <ResourceDictionary Source="/UI.WPFCore;component/Themes/Styles/WindowButtonStyles.xaml" />
+                <ResourceDictionary Source="/UI.WPFCore;component/Themes/Styles/LineStyles.xaml" />
+                <ResourceDictionary Source="/UI.WPFCore;component/Themes/Styles/PathStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
