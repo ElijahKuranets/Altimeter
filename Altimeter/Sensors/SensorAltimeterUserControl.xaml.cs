@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -57,31 +56,5 @@ namespace Altimeter.Sensors
                 _altitude.Score += 1;
             }
         }
-    }
-
-    public class Altitude : INotifyPropertyChanged
-    {
-        private float _score;
-
-        public float Score
-        {
-            get => _score;
-            set
-            {
-                _score = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Score)));
-            }
-        }
-
-        public Altitude(float scr)
-        {
-            this.Score = scr;
-        }
-
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
     }
 }

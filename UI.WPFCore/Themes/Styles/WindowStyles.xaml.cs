@@ -3,11 +3,11 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace UI.WPFCore
+namespace UI.WPFCore.Themes.Styles
 {
     public partial class WindowStyles : ResourceDictionary
     {
-        private TextBlock txtTimer;
+        private TextBlock? _txtTimer;
 
         public WindowStyles()
         {
@@ -59,7 +59,7 @@ namespace UI.WPFCore
         }
         private void OnResizeToHdButtonClick(object sender, RoutedEventArgs e)
         {
-            // For debug purpose. Set the windowd dimensions to the one in G2.
+            // For debug purpose. Set the window dimensions to the one in G2.
             var window = (Window)((FrameworkElement)sender).TemplatedParent;
             window.Width = 1080;
             window.Height = 1920;
@@ -67,16 +67,16 @@ namespace UI.WPFCore
         
         private void txtTime_Loaded(object sender, RoutedEventArgs e)
         {
-            txtTimer = sender as TextBlock;
+            _txtTimer = sender as TextBlock;
 
             var t = new Timer();
             
             t.Interval = 100;
-            t.Elapsed += T_Elapsed;
+            t.Elapsed += TimeElapsed!;
             t.Start();
         }
 
-        private void T_Elapsed(object sender, ElapsedEventArgs e)
+        private void TimeElapsed(object sender, ElapsedEventArgs e)
         {
             var txtBlock = sender as TextBlock;
 
@@ -85,8 +85,8 @@ namespace UI.WPFCore
 
             try
             {
-                if (!txtTimer.Dispatcher.HasShutdownStarted)
-                    txtTimer.Dispatcher.Invoke(() => txtTimer.Text = time);
+                if (!_txtTimer.Dispatcher.HasShutdownStarted)
+                    _txtTimer.Dispatcher.Invoke(() => _txtTimer.Text = time);
             }
             catch { }
         }

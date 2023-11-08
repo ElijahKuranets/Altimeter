@@ -1,9 +1,10 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:gui="clr-namespace:UI.WPFCore.Controls">
+    xmlns:gui="clr-namespace:UI.WPFCore.Controls"
+    xmlns:svgImage="clr-namespace:UI.WPFCore.Controls.SvgImage">
 
-    <ControlTemplate x:Key="DI_Image" TargetType="{x:Type gui:SvgImage}">
+    <ControlTemplate x:Key="DI_Image" TargetType="{x:Type svgImage:SvgImage}">
         <Border
             Width="{TemplateBinding Width}"
             Height="{TemplateBinding Height}">
