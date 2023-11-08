@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -26,7 +25,7 @@ namespace Altimeter.Sensors
             {
                 Interval = TimeSpan.FromSeconds(0.025f)
             };
-            _timer.Tick += timer_Tick;
+            _timer.Tick += Timer_Tick;
             _timer.Start();
         }
 
@@ -51,13 +50,12 @@ namespace Altimeter.Sensors
             set => SetValue(AltimeterWidthProperty, value);
         }
 
-        private async void timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             if (Math.Abs(_altitude.Score - 10000d) > float.Epsilon)
             {
-                _altitude.Score += 1f;
+                _altitude.Score += 1;
             }
-            await Task.Yield();
         }
     }
 
