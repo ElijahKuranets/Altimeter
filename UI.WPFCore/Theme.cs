@@ -6,6 +6,17 @@ namespace UI.WPFCore
 {
     public sealed class Theme
     {
+        private static readonly string aliceBlue = "#e7edf8";
+        private static readonly string linkWater = "#c7d4e1";
+        private static readonly string lightGrayishBlue = "#a7b6c8";
+        private static readonly string baliHai = "#8799af";
+        private static readonly string bermudaGrey = "#6f849c";
+        private static readonly string kashmirBlue = "#576f89";
+        private static readonly string mostlyDesaturatedDarkBlue = "#4a6179";
+        private static readonly string slateBlue = "#3b4e62";
+        private static readonly string deepBlue = "#2c3c4d";
+        private static readonly string midnightBlue = "#1a2836";
+
         [ThreadStatic]
         private static ResourceDictionary? resourceDictionary;
 
@@ -40,16 +51,16 @@ namespace UI.WPFCore
             // ****************************************
             // Styleguide Primary Colors
             // ****************************************            
-            var primaryColor1 = "#e7edf8";
-            var primaryColor2 = "#c7d4e1";
-            var primaryColor3 = "#a7b6c8";
-            var primaryColor4 = "#8799af";
-            var primaryColor5 = "#6f849c";
-            var primaryColor6 = "#576f89";
-            var primaryColor7 = "#4a6179";
-            var primaryColor8 = "#3b4e62";
-            var primaryColor9 = "#2c3c4d";
-            var primaryColor10 = "#1a2836";
+            var primaryColor1 = aliceBlue;
+            var primaryColor2 = linkWater;
+            var primaryColor3 = lightGrayishBlue;
+            var primaryColor4 = baliHai;
+            var primaryColor5 = bermudaGrey;
+            var primaryColor6 = kashmirBlue;
+            var primaryColor7 = mostlyDesaturatedDarkBlue;
+            var primaryColor8 = slateBlue;
+            var primaryColor9 = deepBlue;
+            var primaryColor10 = midnightBlue;
 
             var secondaryColor1 = "#6bb2ff";
             var secondaryColor2 = "#00ffa3";
@@ -174,7 +185,7 @@ namespace UI.WPFCore
 
             SetResource(ThemeResourceKey.RegularTextColor.ToString(), new SolidColorBrush(ColorFromHex("#c7d4e1")));
             SetResource(ThemeResourceKey.DynamicTextColor.ToString(), new SolidColorBrush(ColorFromHex("#6bb2ff")));
-            SetResource(ThemeResourceKey.ActiveTextColor.ToString(), new SolidColorBrush(ColorFromHex("#e7edf8")));
+            SetResource(ThemeResourceKey.ActiveTextColor.ToString(), new SolidColorBrush(ColorFromHex(aliceBlue)));
             SetResource(ThemeResourceKey.InfoTextColor.ToString(), new SolidColorBrush(ColorFromHex("#A0B0C2")));
 
 
@@ -397,7 +408,7 @@ namespace UI.WPFCore
 
                         //SetResource(ThemeResourceKey.RegularTextColor.ToString(), new SolidColorBrush(ColorFromHex("#c7d4e1")));
                         //SetResource(ThemeResourceKey.DynamicTextColor.ToString(), new SolidColorBrush(ColorFromHex("#6bb2ff")));
-                        //SetResource(ThemeResourceKey.ActiveTextColor.ToString(), new SolidColorBrush(ColorFromHex("#e7edf8")));
+                        //SetResource(ThemeResourceKey.ActiveTextColor.ToString(), new SolidColorBrush(ColorFromHex(aliceBlue)));
                         //SetResource(ThemeResourceKey.InfoTextColor.ToString(), new SolidColorBrush(ColorFromHex("#A0B0C2")));
                         SetResource(ThemeResourceKey.RegularTextColor.ToString(), new SolidColorBrush(ColorFromHex("#BB86FC")));
                         SetResource(ThemeResourceKey.DynamicTextColor.ToString(), new SolidColorBrush(ColorFromHex("#BB86FC")));
