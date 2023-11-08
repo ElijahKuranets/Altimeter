@@ -31,7 +31,7 @@ namespace Altimeter.Controls
         public static readonly DependencyProperty BoardWidthProperty =
             DependencyProperty.Register(nameof(AltimeterWidth), typeof(string), typeof(AltimeterUserControl));
         public static readonly DependencyProperty AltitudeProperty = DependencyProperty.Register(
-            nameof(AltitudeValue), typeof(int), typeof(AltimeterUserControl), new PropertyMetadata(default(int), ValuePropertyChangedCallback));
+            nameof(AltitudeValue), typeof(float), typeof(AltimeterUserControl), new PropertyMetadata(default(float), ValuePropertyChangedCallback));
         #endregion
 
         #region altimeter properties
@@ -58,7 +58,7 @@ namespace Altimeter.Controls
         private static void ValuePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = (AltimeterUserControl)d;
-            var value = (int)e.NewValue;
+            var value = (float)e.NewValue;
 
             var bigHandAngle = value / (MaxValue / 360.0);
             var smallHandAngle = (value % 1000) * ((MaxMark * 360.0) / MaxValue);
@@ -76,8 +76,8 @@ namespace Altimeter.Controls
 
             DrawNumbers(width, height);
             DrawTicks(width, height, lineBrush);
-            DrawBigHand(lineBrush);
-            DrawSmallHand(lineBrush);
+            DrawBigHand();
+            DrawSmallHand();
         }
 
         private void DrawTicks(double w, double h, SolidColorBrush lineBrush)
@@ -101,7 +101,7 @@ namespace Altimeter.Controls
             }
         }
 
-        private void DrawNumbers(double weight, double heigth)
+        private void DrawNumbers(double weight, double height)
         {
             var angle = 0;
 
@@ -134,7 +134,7 @@ namespace Altimeter.Controls
             }
         }
 
-        private void DrawSmallHand(SolidColorBrush lineBrush)
+        private void DrawSmallHand()
         {
             var pathFigure = new PathFigure
             {
@@ -179,7 +179,7 @@ namespace Altimeter.Controls
             Altimeter.Children.Add(_smallHandPath);
         }
 
-        private void DrawBigHand(SolidColorBrush lineBrush)
+        private void DrawBigHand()
         {
             var pathFigure = new PathFigure { StartPoint = new Point(135, 125) };
             pathFigure.Segments.Add(
