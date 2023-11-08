@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:Altimeter.Controls"
         xmlns:gui="clr-namespace:UI.WPFCore;assembly=UI.WPFCore"
+        xmlns:sensors="clr-namespace:Altimeter.Sensors"
         Title="Styles"
         Width="500"
         Height="500"
@@ -13,9 +14,13 @@
         <Viewbox>
             <Border><!--BorderBrush="SteelBlue"
             BorderThickness="1"-->
-                <controls:AltimeterUserControl AltimeterWidth="370" AltimeterHeight="370" AltitudeValue="1330"></controls:AltimeterUserControl>
+                <!--<controls:AltimeterUserControl AltimeterWidth="370" AltimeterHeight="370" AltitudeValue="1330"></controls:AltimeterUserControl>-->
+                <sensors:SensorAltimeterUserControl  SensorAltimeterHeight="370"
+                                                     SensorAltimeterWidth="370"></sensors:SensorAltimeterUserControl>
                 <!--<gui:WindowStyles></gui:WindowStyles>-->
             </Border>
+
         </Viewbox>
+       
     </Grid>
 </Window>

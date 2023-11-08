@@ -46,9 +46,9 @@ namespace Altimeter.Controls
             get => (string)GetValue(BoardWidthProperty);
             set => SetValue(BoardWidthProperty, value);
         }
-        public int AltitudeValue
+        public float AltitudeValue
         {
-            get => (int)GetValue(AltitudeProperty);
+            get => (float)GetValue(AltitudeProperty);
             set => SetCurrentValue(AltitudeProperty, value);
         }
         #endregion
