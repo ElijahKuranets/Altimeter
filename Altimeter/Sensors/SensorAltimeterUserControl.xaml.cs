@@ -2,9 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using Dev.Sensors;
 
-namespace Altimeter.Sensors
+namespace Dev.Sensors
 {
     /// <summary>
     /// Interaction logic for SensorAltimeterUserControl.xaml

@@ -121,8 +121,8 @@ namespace Dev.Sensors
                     X2 = w * 0.5,
                     Y2 = 1 + lineLength, // Adjust this value
                     StrokeThickness = 1,
-                    Stroke = lineBrush,
-                    RenderTransform = new RotateTransform(angle, w / 2, w / 2)
+                    RenderTransform = new RotateTransform(angle, w / 2, w / 2),
+                    Style = (Style)FindResource("LineStyleBody1")
                 };
                 canvas.Children.Add(line);
 
@@ -149,13 +149,22 @@ namespace Dev.Sensors
                 transformGroup.Children.Add(new TranslateTransform(-10, 14)); // Adjust these values
                 transformGroup.Children.Add(new RotateTransform(angle, 0, w / 2));
                 border.RenderTransform = transformGroup;
+                
+                //var label = new Label
+                //{
+                //    HorizontalAlignment = HorizontalAlignment.Center,
+                //    VerticalAlignment = VerticalAlignment.Center,
+                //    Content = str,
+                //    Style = (Style)FindResource("LabelStyleBody1"),
+                //};
 
                 var label = new TextBlock
                 {
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     Text = str,
-                    Foreground = lineBrush
+                    Foreground = lineBrush,
+                    //Style = (Style)FindResource("LabelStyleBody1"),
                 };
 
                 if (str is "N" or "E" or "S" or "W")

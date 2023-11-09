@@ -118,14 +118,14 @@ namespace Dev.Controls
                 transformGroup.Children.Add(new TranslateTransform(-MaxMark, 16));
                 transformGroup.Children.Add(new RotateTransform(angle, 0, weight / 2));
                 border.RenderTransform = transformGroup;
-
+                
                 var label = new Label
                 {
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     Content = i.ToString(),
                     Style = (Style)FindResource("LabelStyleBody1"),
-            };
+                };
                 border.LayoutTransform = new RotateTransform(-angle, 0, 0);
                 border.Child = label;
 
