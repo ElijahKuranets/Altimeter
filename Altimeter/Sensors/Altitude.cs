@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Altimeter.Sensors;
+namespace Dev.Sensors;
 
 public class Altitude : INotifyPropertyChanged
 {

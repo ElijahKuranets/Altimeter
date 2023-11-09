@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+    <title>Icon_plame</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Mission-/-System-Status" transform="translate(-528.000000, -172.000000)" fill="#1A2836">
+            <g id="HSI" transform="translate(364.000000, 8.000000)">
+                <g id="Content_HSI" transform="translate(76.000000, 101.000000)">
+                    <path d="M112,80.9984699 L112,78.6 L102.4,72.6 L102.4,69 C102.381366,68.8458172 101.790683,63 100.001276,63 C98.2093172,63 97.6,69 97.6,69 L97.6,72.6 L88,78.6 L88,80.9984699 L97.6,78.6 L97.6,82.2 L95.2047067,84.6 L95.2047067,87 L100.001276,84.6 L104.8,87 L104.8,84.6 L102.4,82.2 L102.4,78.6 L112,80.9984699 Z" id="Icon_plame"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

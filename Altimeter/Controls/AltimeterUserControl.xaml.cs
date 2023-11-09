@@ -5,7 +5,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Shapes;
 using UI.WPFCore;
 
-namespace Altimeter.Controls
+namespace Dev.Controls
 {
     /// <summary>
     /// Interaction logic for AltimeterUserControl.xaml
@@ -85,7 +85,7 @@ namespace Altimeter.Controls
             for (var i = 0; i < Division; i++)
             {
                 var angle = (360.0 / Division) * i + 45;
-                double longLine = i % (Division / MaxMark) == 0 ? 8 : 6;
+                double longLine = i % (Division / MaxMark) == 0 ? 8 : 4;
                 var trace = new RotateTransform(angle, w / 2, w / 2);
                 var line = new Line
                 {

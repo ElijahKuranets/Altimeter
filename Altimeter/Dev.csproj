@@ -7,7 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\svg\Icon_plane.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\UI.WPFCore\UI.WPFCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\svg\Icon_plane.svg" />
   </ItemGroup>
 
 </Project>

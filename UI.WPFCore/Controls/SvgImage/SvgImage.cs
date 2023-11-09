@@ -11,7 +11,7 @@ namespace UI.WPFCore.Controls.SvgImage
     /// </summary>
     public class SvgImage : Control
     {
-        private DrawingGroup? _drawingGroup;
+        private DrawingGroup drawingGroup;
 
         static SvgImage()
         {
@@ -33,24 +33,24 @@ namespace UI.WPFCore.Controls.SvgImage
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
-            if (e.Property.Name == "Foreground" && _drawingGroup!=null)
+            if (e.Property.Name == "Foreground" && drawingGroup != null)
             {
-                OverrideColor(_drawingGroup.Children, ((SolidColorBrush)Foreground).Color);
+                OverrideColor(drawingGroup.Children, ((SolidColorBrush)Foreground).Color);
             }
         }
 
         private void SvgImage_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (_drawingGroup == null) return;
+            if (drawingGroup == null) return;
 
-            OverrideColor(_drawingGroup.Children, ((SolidColorBrush)Foreground).Color);
+            OverrideColor(drawingGroup.Children, ((SolidColorBrush)Foreground).Color);
         }
 
         private void SvgImage_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (_drawingGroup == null) return;
+            if (drawingGroup == null) return;
 
-            OverrideColor(_drawingGroup.Children, HoverColor);
+            OverrideColor(drawingGroup.Children, HoverColor);
         }
 
         #region SourceProperty
@@ -64,8 +64,8 @@ namespace UI.WPFCore.Controls.SvgImage
 
         public Uri Source
         {
-            get => (Uri)GetValue(SourceProperty);
-            set => SetValue(SourceProperty, value);
+            get { return (Uri)GetValue(SourceProperty); }
+            set { SetValue(SourceProperty, value); }
         }
 
         /// <summary>
@@ -117,8 +117,8 @@ namespace UI.WPFCore.Controls.SvgImage
 
         public DrawingGroup SvgDrawing
         {
-            get => (DrawingGroup)GetValue(SvgDrawingProperty);
-            set => SetValue(SvgDrawingProperty, value);
+            get { return (DrawingGroup)GetValue(SvgDrawingProperty); }
+            set { SetValue(SvgDrawingProperty, value); }
         }
 
         public static readonly DependencyProperty SvgDrawingProperty =
@@ -235,57 +235,53 @@ namespace UI.WPFCore.Controls.SvgImage
         {
             if (source == null) return;
 
-            var resourceUri = source;
+            Uri resourceUri = source;
 
-            
+
             if (!source.ToString().ToLowerInvariant().StartsWith("pack://"))
             {
                 resourceUri = new Uri("pack://application:,,,/" + source);
             }
 
             var loader = new SvgImageLoader();
-            _drawingGroup = loader.Load(resourceUri);
+            drawingGroup = loader.Load(resourceUri);
 
-            if (_drawingGroup != null)
+            if (drawingGroup != null)
             {
+                var newColor = Colors.Transparent;
+
                 // Check if Foreground is set. Leave alone if Color is black.
                 // Might consider an override color property, but this is simpler
-                if (Foreground is SolidColorBrush solidColorBrush && solidColorBrush.Color != Colors.Black)
+                if (Foreground is SolidColorBrush && ((SolidColorBrush)Foreground).Color != Colors.Black)
                 {
-                    OverrideColor(_drawingGroup.Children, solidColorBrush.Color);
+                    newColor = ((SolidColorBrush)Foreground).Color;
+                    OverrideColor(drawingGroup.Children, newColor);
                 }
 
-                SetValue(SvgDrawingProperty, _drawingGroup);
+                SetValue(SvgDrawingProperty, drawingGroup);
             }
         }
 
         /// <summary>
-        /// Recursively sets the brush color to the given color for all geometry drawings in the drawing tree.
+        /// Iterate the drawing tree in the svg, and set the brush to the given color.
         /// </summary>
-        /// <param name="collection">The drawing collection to modify.</param>
-        /// <param name="color">The new color to set.</param>
-        private static void OverrideColor(DrawingCollection collection, Color color)
+        /// <param name="collection"></param>
+        /// <param name="color"></param>
+        private void OverrideColor(DrawingCollection collection, Color color)
         {
             foreach (var drawing in collection)
             {
-                switch (drawing)
+                if (drawing is DrawingGroup)
                 {
-                    case DrawingGroup group:
-                        OverrideColor(group.Children, color); // Recursively process child groups
-                        break;
-                    case GeometryDrawing geometryDrawing:
-                    {
-                        // Set the fill brush color
-                        geometryDrawing.Brush = new SolidColorBrush(color);
+                    OverrideColor(((DrawingGroup)drawing).Children, color);
+                }
+                else if (drawing is GeometryDrawing)
+                {
+                    ((GeometryDrawing)drawing).Brush = new SolidColorBrush(color);
 
-                        // Check if the drawing has a pen (for outlines) and update its brush as well
-                        if (geometryDrawing.Pen != null)
-                        {
-                            geometryDrawing.Pen.Brush = new SolidColorBrush(color);
-                        }
-
-                        break;
-                    }
+                    var pen = ((GeometryDrawing)drawing).Pen;
+                    if (pen != null)
+                        pen.Brush = new SolidColorBrush(color);
                 }
             }
         }
@@ -293,12 +289,12 @@ namespace UI.WPFCore.Controls.SvgImage
 
     public class SvgImageLoader : SharpVectors.Converters.SvgImageBase
     {
-        public DrawingGroup? Load(Uri source)
+        public DrawingGroup Load(Uri source)
         {
             //var uri = new Uri("pack://application:,,,/Images/svg/play.svg");
             try
             {
-                return GetDrawing(source);
+                return this.GetDrawing(source);
             }
             catch (Exception ex)
             {
@@ -307,7 +303,7 @@ namespace UI.WPFCore.Controls.SvgImage
             return null;
         }
 
-        public override object? ProvideValue(IServiceProvider serviceProvider)
+        public override object ProvideValue(IServiceProvider serviceProvider)
         {
             return null;
         }

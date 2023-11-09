@@ -1,26 +1,29 @@
 ﻿<Window x:Class="Altimeter.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="clr-namespace:Altimeter.Controls"
         xmlns:gui="clr-namespace:UI.WPFCore;assembly=UI.WPFCore"
         xmlns:sensors="clr-namespace:Altimeter.Sensors"
-        Title="Styles"
-        Width="500"
-        Height="500"
-        Margin="20"
-        Padding="20"
+        xmlns:sensors1="clr-namespace:Dev.Sensors"
+        Title="Instruments"
+        Width="Auto"
+        Height="Auto"
+        SizeToContent="WidthAndHeight"
         Style="{DynamicResource ResourceKey=MainWindowStyle}">
     <Grid Background="{gui:ThemeResource ResourceKey=PrimaryColorBrush8}">
-        <Viewbox>
-            <Border><!--BorderBrush="SteelBlue"
-            BorderThickness="1"-->
-                <!--<controls:AltimeterUserControl AltimeterWidth="370" AltimeterHeight="370" AltitudeValue="1330"></controls:AltimeterUserControl>-->
-                <sensors:SensorAltimeterUserControl  SensorAltimeterHeight="370"
-                                                     SensorAltimeterWidth="370"></sensors:SensorAltimeterUserControl>
-                <!--<gui:WindowStyles></gui:WindowStyles>-->
-            </Border>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <!-- Adjust the width as needed -->
+            <ColumnDefinition Width="*"/>
+            <!-- Adjust the width as needed -->
+        </Grid.ColumnDefinitions>
 
+        <Viewbox Grid.Column="0" Margin="20">
+            <Border>
+                <sensors:SensorAltimeterUserControl/>
+            </Border>
         </Viewbox>
-       
+        <Viewbox Grid.Column="1" Margin="20">
+            <sensors1:SensorAdfUserControl/>
+        </Viewbox>
     </Grid>
 </Window>

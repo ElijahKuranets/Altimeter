@@ -3,21 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:controls="clr-namespace:Altimeter.Controls">
-    <Grid>
-        <StackPanel
-            Grid.Row="3"
-            Grid.RowSpan="2"
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            Orientation="Horizontal">
-            <controls:AltimeterUserControl
+             xmlns:controls="clr-namespace:Dev.Controls">
+   
+        <Grid>
+            <StackPanel>
+                <controls:AltimeterUserControl
                 x:Name="AltimeterUserControl"
-                AltimeterHeight="165"
-                AltimeterWidth="165"
+                AltimeterHeight="250"
+                AltimeterWidth="250"
                 AltitudeValue="{Binding Score}" />
-        </StackPanel>
-    </Grid>
+            </StackPanel>
+        </Grid>
 </UserControl>
