@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Nsm.UI.WPF.Converters
+namespace UI.WPFCore.Converters
 {
     /// <summary>
     /// InvertValueConverter converts a double value inverted.

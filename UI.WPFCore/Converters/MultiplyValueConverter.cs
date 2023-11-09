@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Nsm.UI.WPF.Converters
+namespace UI.WPFCore.Converters
 {
     /// <summary>
     /// Multiply a double value using a multiplier of type double.

@@ -1,0 +1,1033 @@
+﻿<UserControl x:Class="Dev.Sensors.HsiAdiMarkersUserControl" x:Name="HsiUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:gui="clr-namespace:UI.WPFCore;assembly=UI.WPFCore"
+             xmlns:local="clr-namespace:Dev.Sensors"
+             xmlns:svgImage="clr-namespace:UI.WPFCore.Controls.SvgImage;assembly=UI.WPFCore"
+             xmlns:converters="clr-namespace:UI.WPFCore.Converters;assembly=UI.WPFCore">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition>
+                <RowDefinition.Style>
+                    <Style TargetType="RowDefinition">
+                        <Style.Triggers>
+                            <DataTrigger
+                                Binding="{Binding ShowAllLabels, RelativeSource={RelativeSource AncestorType=local:HsiAdiMarkersUserControl}}"
+                                Value="False">
+                                <Setter Property="Height" Value="0" />
+                            </DataTrigger>
+                            <DataTrigger
+                                Binding="{Binding ShowAllLabels, RelativeSource={RelativeSource AncestorType=local:HsiAdiMarkersUserControl}}"
+                                Value="True">
+                                <Setter Property="Height" Value="54" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </RowDefinition.Style>
+            </RowDefinition>
+            <RowDefinition Height="6" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="54" />
+        </Grid.RowDefinitions>
+
+        <!--
+            **********************
+            Top
+            ********************
+        -->
+
+        <Canvas x:Name="borderTouchCanvas"
+            Grid.Row="0"
+            Grid.RowSpan="4"
+            Grid.ColumnSpan="3"
+            Margin="0,6,0,0"
+            Panel.ZIndex="1"
+            MouseLeftButtonDown="BorderTouchCanvas_OnMouseDown"
+            MouseMove="BorderTouchCanvas_OnMouseMove"
+            Visibility="{Binding TouchCanvasVisibility, Converter={converters:BoolToVisibilityCollapseValueConverter}, RelativeSource={RelativeSource AncestorType={x:Type local:HsiAdiMarkersUserControl}}}">
+            
+            <Canvas.RenderTransform>
+                <RotateTransform Angle="{Binding ElementName=HsiUserControl, Path=AngleTouchCanvas}" />
+            </Canvas.RenderTransform>
+        </Canvas>
+
+        <Grid
+            Grid.Row="0" Grid.Column="0"
+            Visibility="{Binding ElementName=HsiUserControl, Path=ShowAllLabels, Converter={converters:BoolToVisibilityCollapseValueConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="54" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="130" />
+            </Grid.ColumnDefinitions>
+
+            <!--  Course  -->
+            <StackPanel
+                Grid.Column="0"
+                VerticalAlignment="Bottom">
+                <WrapPanel>
+                    <!--<gui:LabelH2 Content="{Binding ElementName=HsiUserControl, Path=PrimaryNavName}" />
+                    <gui:LabelH3
+                        Margin="10,0,0,0"
+                        Content="Crs" />-->
+                </WrapPanel>
+                <!--<gui:LabelDynamicValues2WithUnit
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Width="82"
+                    BorderBrush="{gui:ThemeResource ResourceKey=PrimaryColorBrush9}"
+                    BorderThickness="2"
+                    Content="{Binding ElementName=HsiUserControl, Path=PrimaryNavCourse, Converter={converters:FormatDoublelValueConverter}, ConverterParameter='000', Mode=TwoWay}"
+                    LeftAlign="True"
+                    Unit="°" />-->
+            </StackPanel>
+
+            <!--  Outbound/Inbound  -->
+            <!--<gui:LabelH3
+                Grid.Column="1"
+                Width="Auto"
+                Height="32"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Content="{Binding ElementName=HsiUserControl, Path=OutBoundInboundTxt}"
+                Foreground="White"
+                Visibility="{Binding ElementName=HsiUserControl, Path=ShowOutboundInBound, Converter={converters:BoolToVisibilityValueConverter}}" />-->
+
+            <!--  Heading  -->
+            <!--<gui:LabelDynamicValues2 x:Name="txtHeading"
+                Grid.Column="1"
+                Width="50"
+                Height="32"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                HorizontalContentAlignment="Center"
+                BorderBrush="{gui:ThemeResource ResourceKey=PrimaryColorBrush9}"
+                BorderThickness="2"
+                Content="{Binding ElementName=HsiUserControl, Path=Heading, Converter={converters:FormatDoublelValueConverter}, ConverterParameter='000'}" />-->
+
+            <!--  Dist  -->
+            <StackPanel
+                Grid.Column="2"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom">
+                <WrapPanel HorizontalAlignment="Left">
+                    <!--<gui:LabelH2 Content="{Binding ElementName=HsiUserControl, Path=DistanceSelected}" />
+                    <gui:LabelH3
+                        Margin="10,0,0,0"
+                        Content="Dist" />-->
+                </WrapPanel>
+
+                <!--<gui:LabelDynamicValues2WithUnit
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Width="80"
+                    gui:LabelProperties.Label="NM"
+                    BorderBrush="{gui:ThemeResource ResourceKey=PrimaryColorBrush9}"
+                    BorderThickness="2"
+                    Content="{Binding ElementName=HsiUserControl, Path=Distance, Converter={converters:FormatDoublelValueConverter}, ConverterParameter='0.0'}" />-->
+            </StackPanel>
+        </Grid>
+
+        <!--
+            **********************
+            Above horizon, arrow
+            **********************
+        -->
+        <Grid Grid.Row="1" Grid.Column="0">
+            <!--  Arrow 12 x 6  -->
+            <Polygon
+                HorizontalAlignment="Center"
+                Fill="{gui:ThemeResource ResourceKey=PrimaryColorBrush2}"
+                Points="0,0 12,0, 6,6"
+                Stroke="{gui:ThemeResource ResourceKey=PrimaryColorBrush2}" />
+        </Grid>
+        
+        <!--
+            **********************
+            Middle, horizon
+            **********************
+        -->
+        <Grid Grid.Row="2">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger
+                            Binding="{Binding ShowAllLabels, RelativeSource={RelativeSource AncestorType=local:HsiAdiMarkersUserControl}}"
+                            Value="False">
+                            <Setter Property="Grid.RowSpan" Value="3" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="423*" />
+                <ColumnDefinition Width="17*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="54" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition>
+                        <ColumnDefinition.Style>
+                            <Style TargetType="ColumnDefinition">
+                                <Style.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding ShowAllLabels, RelativeSource={RelativeSource AncestorType=local:HsiAdiMarkersUserControl}}"
+                                        Value="False">
+                                        <Setter Property="Width" Value="Auto" />
+                                    </DataTrigger>
+                                    <DataTrigger
+                                        Binding="{Binding ShowAllLabels, RelativeSource={RelativeSource AncestorType=local:HsiAdiMarkersUserControl}}"
+                                        Value="True">
+                                        <Setter Property="Width" Value="54" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ColumnDefinition.Style>
+                    </ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!--  OMI  -->
+
+                <StackPanel
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Visibility="{Binding ElementName=HsiUserControl, Path=ShowAllLabels, Converter={converters:BoolToVisibilityCollapseValueConverter}}">
+
+                    <Border
+                        Width="44"
+                        Height="30"
+                        Margin="0,5,0,5"
+                        Padding="6,4,6,4"
+                        HorizontalAlignment="Left"
+                        BorderBrush="{gui:ThemeResource ResourceKey=PrimaryColorBrush9}"
+                        BorderThickness="2"
+                        CornerRadius="3">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!--<gui:LabelH2
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                Content="O" />-->
+
+                            <Ellipse x:Name="indicatorO"
+                                Grid.Column="1"
+                                Width="8"
+                                Height="8"
+                                HorizontalAlignment="Right"
+                                Fill="{Binding ElementName=HsiUserControl, Path=MarkerOColorBrush}" />
+                        </Grid>
+                    </Border>
+
+                    <Border
+                        Width="44"
+                        Height="30"
+                        Margin="0,5,0,5"
+                        Padding="6,4,6,4"
+                        HorizontalAlignment="Left"
+                        BorderBrush="{gui:ThemeResource ResourceKey=PrimaryColorBrush9}"
+                        BorderThickness="2"
+                        CornerRadius="3">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!--<gui:LabelH2
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                Content="M" />-->
+
+                            <Ellipse x:Name="indicatorM"
+                                Grid.Column="1"
+                                Width="8"
+                                Height="8"
+                                HorizontalAlignment="Right"
+                                Fill="{Binding ElementName=HsiUserControl, Path=MarkerMColorBrush}" />
+                        </Grid>
+                    </Border>
+                    <Border
+                        Width="44"
+                        Height="30"
+                        Margin="0,5,0,5"
+                        Padding="6,4,6,4"
+                        HorizontalAlignment="Left"
+                        BorderBrush="{gui:ThemeResource ResourceKey=PrimaryColorBrush9}"
+                        BorderThickness="2"
+                        CornerRadius="3">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!--<gui:LabelH2
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                Content="I" />-->
+
+                            <Ellipse x:Name="indicatorI"
+                                Grid.Column="1"
+                                Width="8"
+                                Height="8"
+                                HorizontalAlignment="Right"
+                                Fill="{Binding ElementName=HsiUserControl, Path=MarkerIColorBrush}" />
+                        </Grid>
+                    </Border>
+
+                </StackPanel>
+
+                <!--  Canvas  -->
+                <Border x:Name="borderCanvas"
+                    Background="Transparent"
+                    SizeChanged="borderCanvas_SizeChanged">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Style.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding ShowAllLabels, RelativeSource={RelativeSource AncestorType=local:HsiAdiMarkersUserControl}}"
+                                    Value="False">
+                                    <Setter Property="Grid.Column" Value="0" />
+                                    <Setter Property="Grid.ColumnSpan" Value="3" />
+                                </DataTrigger>
+                                <DataTrigger
+                                    Binding="{Binding ShowAllLabels, RelativeSource={RelativeSource AncestorType=local:HsiAdiMarkersUserControl}}"
+                                    Value="True">
+                                    <Setter Property="Grid.Column" Value="1" />
+                                    <Setter Property="Grid.ColumnSpan" Value="1" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <!--  Keep canvas square at all times  -->
+                    <Canvas x:Name="canvasArtificialHorizon"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Background="Transparent">
+
+                        <!--  Artificial Horizon  -->
+                        <Border x:Name="borderHorizon"
+                            MouseLeftButtonDown="Canvas_OnMouseLeftButtonDown">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Rectangle Grid.Row="0">
+                                    <Rectangle.Fill>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Offset="0.0" Color="#24485B" />
+                                            <GradientStop Offset="1.0" Color="#296B8B" />
+                                        </LinearGradientBrush>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+
+                                <Rectangle Grid.Row="1">
+                                    <Rectangle.Fill>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Offset="0.0" Color="#8A6E61" />
+                                            <GradientStop Offset="1.0" Color="#423934" />
+                                        </LinearGradientBrush>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+
+                            </Grid>
+
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <TranslateTransform x:Name="horizonTranslate" X="0" Y="{Binding ElementName=HsiUserControl, Path=Pitch}" />
+                                    <RotateTransform x:Name="horizonRotate" Angle="{Binding ElementName=HsiUserControl, Path=Roll}" CenterX="{Binding ElementName=borderHorizon, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" CenterY="{Binding ElementName=borderHorizon, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5, Path=ActualHeight}" />
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                        </Border>
+
+                        <!--  Mid point lines  -->
+                        <Grid>
+                            <Line
+                                Stroke="{gui:ThemeResource ResourceKey=PrimaryColorBrush2}"
+                                StrokeThickness="2"
+                                X1="0"
+                                X2="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.25}"
+                                Y1="0"
+                                Y2="0" />
+                            
+                            <Line
+                                Stroke="{gui:ThemeResource ResourceKey=PrimaryColorBrush2}"
+                                StrokeThickness="2"
+                                X1="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.25}"
+                                X2="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.25}"
+                                Y1="0"
+                                Y2="6" />
+                            
+
+                            <Grid.RenderTransform>
+                                <TranslateTransform Y="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" />
+                            </Grid.RenderTransform>
+                        </Grid>
+
+                        <Grid>
+                            <Line
+                                Stroke="{gui:ThemeResource ResourceKey=PrimaryColorBrush2}"
+                                StrokeThickness="2"
+                                X1="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.75}"
+                                X2="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, Path=ActualWidth}"
+                                Y1="0"
+                                Y2="0" />
+                            
+                            <Line
+                                Stroke="{gui:ThemeResource ResourceKey=PrimaryColorBrush2}"
+                                StrokeThickness="2"
+                                X1="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.75}"
+                                X2="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.75}"
+                                Y1="0"
+                                Y2="6" />
+                                
+                            <Grid.RenderTransform>
+                                <TranslateTransform Y="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" />
+                            </Grid.RenderTransform>
+                        </Grid>
+
+                        <!--  N W S E  -->
+                        <Canvas x:Name="canvasNSWE"
+                            Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=1}, Path=ActualWidth}"
+                            Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=1}, Path=ActualHeight}">
+                            <!--  Markers and heading text added in code behind  -->
+                            <Canvas.RenderTransform>
+                                <RotateTransform Angle="{Binding ElementName=HsiUserControl, Path=Heading, Converter={converters:InvertValueConverter}}" CenterX="{Binding ElementName=canvasArtificialHorizon, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" CenterY="{Binding ElementName=canvasArtificialHorizon, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5, Path=ActualHeight}" />
+                            </Canvas.RenderTransform>
+                        </Canvas>
+                        <!--  N W S E  -->
+                        <Canvas
+                            Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=1}, Path=ActualWidth}"
+                            Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=1}, Path=ActualHeight}">
+                            <!--  Markers and heading text added in code behind  -->
+                            <Canvas.RenderTransform>
+                                <RotateTransform Angle="{Binding ElementName=HsiUserControl, Path=Heading, Converter={converters:InvertValueConverter}}" CenterX="{Binding ElementName=canvasArtificialHorizon, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" CenterY="{Binding ElementName=canvasArtificialHorizon, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5, Path=ActualHeight}" />
+                            </Canvas.RenderTransform>
+                        </Canvas>
+
+                        <Canvas x:Name="canvasSecondaryNeedles">
+
+                            <!--  NAV 1  first needle  -->
+                            <Path
+                                Data="{Binding ElementName=HsiUserControl, Path=Nav1Data}"
+                                Fill="{Binding ElementName=HsiUserControl, Path=Nav1NeedleFill}"
+                                Stroke="{Binding ElementName=HsiUserControl, Path=Nav1Color}"
+                                StrokeThickness="{Binding ElementName=HsiUserControl, Path=Nav1NeedleLineThickness}"
+                                Visibility="{Binding ElementName=HsiUserControl, Path=Nav1Visibility}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=2}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" Y="0" />
+                                        <RotateTransform Angle="{Binding ElementName=HsiUserControl, Path=Nav1Bearing}" CenterX="{Binding ElementName=canvasArtificialHorizon, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" CenterY="{Binding ElementName=canvasArtificialHorizon, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5, Path=ActualHeight}" />
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+
+                            <!--  NAV 1  second needle  -->
+                            <Path
+                                Data="{Binding ElementName=HsiUserControl, Path=Nav12Data}"
+                                Fill="{Binding ElementName=HsiUserControl, Path=Nav12NeedleFill}"
+                                Stroke="{Binding ElementName=HsiUserControl, Path=Nav12Color}"
+                                StrokeThickness="{Binding ElementName=HsiUserControl, Path=Nav12NeedleLineThickness}"
+                                Visibility="{Binding ElementName=HsiUserControl, Path=Nav12Visibility}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=2}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" Y="0" />
+                                        <RotateTransform Angle="{Binding ElementName=HsiUserControl, Path=Nav12Bearing}" CenterX="{Binding ElementName=canvasArtificialHorizon, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" CenterY="{Binding ElementName=canvasArtificialHorizon, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5, Path=ActualHeight}" />
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+
+                            <!--  NAV 2  first needle  -->
+                            <Path
+                                Data="{Binding ElementName=HsiUserControl, Path=Nav2Data}"
+                                Fill="{Binding ElementName=HsiUserControl, Path=Nav2NeedleFill}"
+                                Stroke="{Binding ElementName=HsiUserControl, Path=Nav2Color}"
+                                StrokeThickness="{Binding ElementName=HsiUserControl, Path=Nav2NeedleLineThickness}"
+                                Visibility="{Binding ElementName=HsiUserControl, Path=Nav2Visibility}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=2}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" Y="0" />
+                                        <RotateTransform Angle="{Binding ElementName=HsiUserControl, Path=Nav2Bearing}" CenterX="{Binding ElementName=canvasArtificialHorizon, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" CenterY="{Binding ElementName=canvasArtificialHorizon, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5, Path=ActualHeight}" />
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+
+                            <!--  NAV 2  second needle  -->
+                            <Path
+                                Data="{Binding ElementName=HsiUserControl, Path=Nav22Data}"
+                                Fill="{Binding ElementName=HsiUserControl, Path=Nav22NeedleFill}"
+                                Stroke="{Binding ElementName=HsiUserControl, Path=Nav22Color}"
+                                StrokeThickness="{Binding ElementName=HsiUserControl, Path=Nav22NeedleLineThickness}"
+                                Visibility="{Binding ElementName=HsiUserControl, Path=Nav22Visibility}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=2}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" Y="0" />
+                                        <RotateTransform Angle="{Binding ElementName=HsiUserControl, Path=Nav22Bearing}" CenterX="{Binding ElementName=canvasArtificialHorizon, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" CenterY="{Binding ElementName=canvasArtificialHorizon, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5, Path=ActualHeight}" />
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+
+                            <!--  NAV 3 first needle  -->
+                            <Path
+                                Data="{Binding ElementName=HsiUserControl, Path=Nav3Data}"
+                                Fill="{Binding ElementName=HsiUserControl, Path=Nav3NeedleFill}"
+                                Stroke="{Binding ElementName=HsiUserControl, Path=Nav3Color}"
+                                StrokeThickness="{Binding ElementName=HsiUserControl, Path=Nav3NeedleLineThickness}"
+                                Visibility="{Binding ElementName=HsiUserControl, Path=Nav3Visibility}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=2}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" Y="0" />
+                                        <RotateTransform Angle="{Binding ElementName=HsiUserControl, Path=Nav3Bearing}" CenterX="{Binding ElementName=canvasArtificialHorizon, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" CenterY="{Binding ElementName=canvasArtificialHorizon, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5, Path=ActualHeight}" />
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+
+
+                            <!--  NAV 3  second needle  -->
+                            <Path
+                                Data="{Binding ElementName=HsiUserControl, Path=Nav32Data}"
+                                Fill="{Binding ElementName=HsiUserControl, Path=Nav32NeedleFill}"
+                                Stroke="{Binding ElementName=HsiUserControl, Path=Nav32Color}"
+                                StrokeThickness="{Binding ElementName=HsiUserControl, Path=Nav32NeedleLineThickness}"
+                                Visibility="{Binding ElementName=HsiUserControl, Path=Nav32Visibility}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=2}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" Y="0" />
+                                        <RotateTransform Angle="{Binding ElementName=HsiUserControl, Path=Nav32Bearing}" CenterX="{Binding ElementName=canvasArtificialHorizon, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" CenterY="{Binding ElementName=canvasArtificialHorizon, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5, Path=ActualHeight}" />
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+
+
+                            <!--  NAV 4 first needle  -->
+                            <Path
+                                Data="{Binding ElementName=HsiUserControl, Path=Nav4Data}"
+                                Fill="{Binding ElementName=HsiUserControl, Path=Nav4NeedleFill}"
+                                Stroke="{Binding ElementName=HsiUserControl, Path=Nav4Color}"
+                                StrokeThickness="{Binding ElementName=HsiUserControl, Path=Nav4NeedleLineThickness}"
+                                Visibility="{Binding ElementName=HsiUserControl, Path=Nav4Visibility}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=2}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" Y="0" />
+                                        <RotateTransform Angle="{Binding ElementName=HsiUserControl, Path=Nav4Bearing}" CenterX="{Binding ElementName=canvasArtificialHorizon, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" CenterY="{Binding ElementName=canvasArtificialHorizon, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5, Path=ActualHeight}" />
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+
+                            <!--  NAV 4 second needle  -->
+                            <Path
+                                Data="{Binding ElementName=HsiUserControl, Path=Nav42Data}"
+                                Fill="{Binding ElementName=HsiUserControl, Path=Nav42NeedleFill}"
+                                Stroke="{Binding ElementName=HsiUserControl, Path=Nav42Color}"
+                                StrokeThickness="{Binding ElementName=HsiUserControl, Path=Nav42NeedleLineThickness}"
+                                Visibility="{Binding ElementName=HsiUserControl, Path=Nav42Visibility}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=2}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" Y="0" />
+                                        <RotateTransform Angle="{Binding ElementName=HsiUserControl, Path=Nav42Bearing}" CenterX="{Binding ElementName=canvasArtificialHorizon, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" CenterY="{Binding ElementName=canvasArtificialHorizon, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5, Path=ActualHeight}" />
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            
+                            <Canvas.Clip>
+                                <!--  Clip so that the aircraft in the middle does not get any lines drawn over or under  -->
+                                <CombinedGeometry GeometryCombineMode="Exclude">
+                                    <CombinedGeometry.Geometry1>
+                                        <RectangleGeometry Rect="{Binding ElementName=HsiUserControl, Path=CanvasRect}" />
+                                    </CombinedGeometry.Geometry1>
+                                    <CombinedGeometry.Geometry2>
+                                        <EllipseGeometry
+                                            Center="{Binding ElementName=HsiUserControl, Path=CanvasMidPoint}"
+                                            RadiusX="20"
+                                            RadiusY="20" />
+                                    </CombinedGeometry.Geometry2>
+                                </CombinedGeometry>
+                            </Canvas.Clip>
+                        </Canvas>
+
+                        <!--  Primary NAV Needle  -->
+                        <Canvas x:Name="canvasPrimaryNeedle"
+                            Visibility="{Binding ElementName=HsiUserControl, Path=PrimaryNavVisibility}"
+                            ZIndex="1">
+                            <Canvas.Resources>
+                                <Style TargetType="Ellipse">
+                                    <Setter Property="Height" Value="10" />
+                                    <Setter Property="Width" Value="10" />
+                                    <Setter Property="StrokeThickness" Value="1" />
+                                    <Setter Property="Stroke" Value="White" />
+                                </Style>
+                            </Canvas.Resources>
+                            <Ellipse x:Name="ellipse1" />
+                            <Ellipse x:Name="ellipse2" />
+                            <Ellipse x:Name="ellipse3" />
+                            <Ellipse x:Name="ellipse4" />
+
+                            <!--  Deviation Line  -->
+                            <Polyline
+                                Name="deviationPart"
+                                Points="{Binding ElementName=HsiUserControl, Path=PrimaryNeedleDeviationPointCollection}"
+                                Stroke="White"
+                                StrokeThickness="2"
+                                Visibility="{Binding ElementName=HsiUserControl, Path=ShowLateralGuidance, Converter={converters:BoolToVisibilityValueConverter}}">
+                                <Polyline.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=2}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" Y="0" />
+                                        <TranslateTransform X="{Binding ElementName=HsiUserControl, Path=PrimaryNavDeviation}" Y="0" />
+                                    </TransformGroup>
+                                </Polyline.RenderTransform>
+                            </Polyline>
+
+                            <!--  Ref deviation line  -->
+                            <Polyline
+                                Points="{Binding ElementName=HsiUserControl, Path=PrimaryRefNeedleDeviationPointCollection}"
+                                Stroke="Magenta"
+                                StrokeThickness="2"
+                                Visibility="{Binding ElementName=HsiUserControl, Path=ShowLateralGuidanceReference, Converter={converters:BoolToVisibilityValueConverter}}">
+                                <Polyline.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=2}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" Y="0" />
+                                        <TranslateTransform X="{Binding ElementName=HsiUserControl, Path=PrimaryNavRefDeviation}" Y="0" />
+                                    </TransformGroup>
+                                </Polyline.RenderTransform>
+                            </Polyline>
+
+                            <!--  Primary needle  -->
+                            <Path
+                                Stroke="White"
+                                StrokeThickness="2">
+                                <Path.Data>
+                                    <GeometryGroup>
+                                        <LineGeometry
+                                            StartPoint="0,16"
+                                            EndPoint="-7,22" />
+                                        <LineGeometry
+                                            StartPoint="0,16"
+                                            EndPoint="7,22" />
+                                        <LineGeometry
+                                            StartPoint="0,16"
+                                            EndPoint="0,56" />
+                                        <LineGeometry
+                                            StartPoint="0,-16"
+                                            EndPoint="0,-56">
+                                            <LineGeometry.Transform>
+                                                <TranslateTransform X="0" Y="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=2}, Path=ActualWidth}" />
+                                            </LineGeometry.Transform>
+                                        </LineGeometry>
+                                    </GeometryGroup>
+                                </Path.Data>
+                                <Path.RenderTransform>
+                                    <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=2}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" Y="0" />
+                                </Path.RenderTransform>
+                            </Path>
+
+                            <Canvas.RenderTransform>
+                                <RotateTransform Angle="{Binding ElementName=HsiUserControl, Path=PrimaryNavCourseCompass}" CenterX="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=2}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" CenterY="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=2}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" />
+                            </Canvas.RenderTransform>
+
+                            <!--<Canvas.Clip>
+                            -->
+                            <!--  Clip so that the aircraft in the middle does not get any lines drawn over or under  -->
+                            <!--
+                                <CombinedGeometry GeometryCombineMode="Exclude">
+                                    <CombinedGeometry.Geometry1>
+                                        <RectangleGeometry Rect="{Binding ElementName=HsiUserControl, Path=CanvasRect}" />
+                                    </CombinedGeometry.Geometry1>
+                                    <CombinedGeometry.Geometry2>
+                                        <EllipseGeometry
+                                            Center="{Binding ElementName=HsiUserControl, Path=CanvasMidPoint}"
+                                            RadiusX="20"
+                                            RadiusY="20" />
+                                    </CombinedGeometry.Geometry2>
+                                </CombinedGeometry>
+                            </Canvas.Clip>-->
+                        </Canvas>
+
+                        <!--  VOR TO Indicator  -->
+                        <Polygon x:Name="toTriangle"
+                            Fill="Orange"
+                            Opacity="0.8"
+                            Points="-10, 0, 10, 0, 0, -15, -10, 0"
+                            Stroke="DarkBlue"
+                            StrokeThickness="2"
+                            Visibility="{Binding ElementName=HsiUserControl, Path=ShowToIndicator}">
+                            <Polygon.RenderTransform>
+                                <TransformGroup>
+                                    <TranslateTransform X="30" Y="-12" />
+                                    <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=1}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" Y="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=1}, Path=ActualHeight, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" />
+                                </TransformGroup>
+                            </Polygon.RenderTransform>
+                        </Polygon>
+
+                        <!--  VOR FROM Indicator  -->
+                        <Polygon x:Name="fromTriangle"
+                            Fill="Orange"
+                            Opacity="0.8"
+                            Points="-10, 0, 10, 0, 0, -15, -10, 0"
+                            Stroke="DarkBlue"
+                            StrokeThickness="2"
+                            Visibility="{Binding ElementName=HsiUserControl, Path=ShowFromIndicator}">
+                            <Polygon.RenderTransform>
+                                <TransformGroup>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="180" />
+                                        <TranslateTransform X="30" Y="12" />
+                                        <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=1}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" Y="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}, AncestorLevel=1}, Path=ActualHeight, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" />
+                                    </TransformGroup>
+                                </TransformGroup>
+                            </Polygon.RenderTransform>
+                        </Polygon>
+
+                        <!--  Artificial horizon circle  -->
+                        <Ellipse x:Name="ellipseArtificialHorizon"
+                            Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, Path=ActualWidth}"
+                            Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, Path=ActualHeight}"
+                            Stroke="{gui:ThemeResource ResourceKey=PrimaryColorBrush9}"
+                            StrokeThickness="2" />
+
+                        <Border x:Name="borderAircraft"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Visibility="{Binding ElementName=HsiUserControl, Path=ShowNAVsymbol, Converter={converters:InvertedBooleanToVisibilityConverter}}">
+                            <svgImage:SvgImage
+                                Width="24"
+                                Height="24"
+                                Foreground="Black"
+                                Source="Images/svg/icon_plane.svg" />
+                        </Border>
+
+                        <Grid
+                            Width="{Binding ActualWidth, ElementName=canvasArtificialHorizon}"
+                            Height="{Binding ActualHeight, ElementName=canvasArtificialHorizon}">
+                            <Border
+                                Margin="60,60,60,60"
+                                Padding="5,0,5,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                BorderBrush="{gui:ThemeResource ResourceKey=FlagColorBrush}"
+                                BorderThickness="2"
+                                CornerRadius="3"
+                                Visibility="{Binding ElementName=HsiUserControl, Path=ShowNAVsymbol, Converter={converters:BoolToVisibilityValueConverter}}">
+                                <!--<gui:LabelValues2
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Content="NAV"
+                                    FontSize="20"
+                                    Foreground="{gui:ThemeResource ResourceKey=FlagColorBrush}" />-->
+                            </Border>
+                        </Grid>
+
+                        <Canvas.Clip>
+                            <EllipseGeometry
+                                Center="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, Path=ActualHeight, Converter={converters:HalfPointValueConverter}}"
+                                RadiusX="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, Path=ActualWidth, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}"
+                                RadiusY="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, Path=ActualHeight, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.5}" />
+                        </Canvas.Clip>
+
+                    </Canvas>
+                </Border>
+
+                <!--  Glideslope  -->
+                <Grid x:Name="gridGlideslope"
+                    Grid.Column="2"
+                    Visibility="{Binding ElementName=HsiUserControl, Path=ShowGlideslope, Converter={converters:BoolToVisibilityValueConverter}}">
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Style.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding ShowAllLabels, RelativeSource={RelativeSource AncestorType=local:HsiAdiMarkersUserControl}}"
+                                    Value="False">
+                                    <Setter Property="Margin" Value="10,20,2,20" />
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                </DataTrigger>
+                                <DataTrigger
+                                    Binding="{Binding ShowAllLabels, RelativeSource={RelativeSource AncestorType=local:HsiAdiMarkersUserControl}}"
+                                    Value="True">
+                                    <Setter Property="Margin" Value="10,20,10,20" />
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+
+                    <!--  the same between line and border  -->
+                    <Line
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Stroke="{gui:ThemeResource ResourceKey=PrimaryColorBrush3}"
+                        StrokeThickness="1"
+                        Visibility="{Binding ElementName=HsiUserControl, Path=ShowGPsymbol, Converter={converters:InvertedBooleanToVisibilityConverter}}"
+                        X1="0"
+                        X2="10"
+                        Y1="0"
+                        Y2="0" />
+                    
+
+                    <Border
+                        Margin="-2"
+                        VerticalAlignment="Center"
+                        BorderBrush="{gui:ThemeResource ResourceKey=FlagColorBrush}"
+                        BorderThickness="2"
+                        CornerRadius="3"
+                        Visibility="{Binding ElementName=HsiUserControl, Path=ShowGPsymbol, Converter={converters:BoolToVisibilityValueConverter}}">
+                        <!--<gui:LabelValues2
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Content="GP"
+                            Foreground="{gui:ThemeResource ResourceKey=FlagColorBrush}" />-->
+                    </Border>
+
+                    <Ellipse
+                        Width="10"
+                        Height="10"
+                        HorizontalAlignment="Center"
+                        Stroke="{gui:ThemeResource ResourceKey=PrimaryColorBrush3}"
+                        StrokeThickness="1">
+                        <Ellipse.RenderTransform>
+                            <TranslateTransform X="0" Y="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=ActualHeight, Converter={converters:MultiplyValueConverter}, ConverterParameter=-0.2}" />
+                        </Ellipse.RenderTransform>
+                    </Ellipse>
+
+                    <Ellipse
+                        Width="10"
+                        Height="10"
+                        HorizontalAlignment="Center"
+                        Stroke="{gui:ThemeResource ResourceKey=PrimaryColorBrush3}"
+                        StrokeThickness="1">
+                        <Ellipse.RenderTransform>
+                            <TranslateTransform X="0" Y="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=ActualHeight, Converter={converters:MultiplyValueConverter}, ConverterParameter=-0.4}" />
+                        </Ellipse.RenderTransform>
+                    </Ellipse>
+                    <Ellipse
+                        Width="10"
+                        Height="10"
+                        HorizontalAlignment="Center"
+                        Stroke="{gui:ThemeResource ResourceKey=PrimaryColorBrush3}"
+                        StrokeThickness="1">
+                        <Ellipse.RenderTransform>
+                            <TranslateTransform X="0" Y="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=ActualHeight, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.2}" />
+                        </Ellipse.RenderTransform>
+                    </Ellipse>
+
+                    <Ellipse
+                        Width="10"
+                        Height="10"
+                        HorizontalAlignment="Center"
+                        Stroke="{gui:ThemeResource ResourceKey=PrimaryColorBrush3}"
+                        StrokeThickness="1">
+                        <Ellipse.RenderTransform>
+                            <TranslateTransform X="0" Y="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=ActualHeight, Converter={converters:MultiplyValueConverter}, ConverterParameter=0.4}" />
+                        </Ellipse.RenderTransform>
+                    </Ellipse>
+
+                    <Polyline
+                        Margin="0,8,10,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Fill="{gui:ThemeResource ResourceKey=PrimaryColorBrush2}"
+                        Points="0,0 8,8 8,-8"
+                        Visibility="{Binding ElementName=HsiUserControl, Path=ShowVerticalGuidance, Converter={converters:BoolToVisibilityValueConverter}}">
+                        <Polyline.RenderTransform>
+                            <TranslateTransform X="0" Y="{Binding PrimaryNavGpDeviation}" />
+                        </Polyline.RenderTransform>
+                    </Polyline>
+
+                    <Polyline
+                        Margin="0,8,10,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Fill="Magenta"
+                        Points="0,0 6,6 6,-6"
+                        Visibility="{Binding ElementName=HsiUserControl, Path=ShowVerticalGuidanceReference, Converter={converters:BoolToVisibilityValueConverter}}">
+                        <Polyline.RenderTransform>
+                            <TranslateTransform X="0" Y="{Binding PrimaryNavRefGpDeviation}" />
+                        </Polyline.RenderTransform>
+                    </Polyline>
+                </Grid>
+
+            </Grid>
+        </Grid>
+
+        <!--
+            **********************
+            Bottom
+            **********************
+        -->
+        <Grid
+            Grid.Row="3" 
+            Visibility="{Binding ElementName=HsiUserControl, Path=ShowAllLabels, Converter={converters:BoolToVisibilityCollapseValueConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="54" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="90" />
+            </Grid.ColumnDefinitions>
+
+            <!--  GS  -->
+            <StackPanel Grid.Column="0">
+                <!--<WrapPanel>
+                    <gui:LabelH2 Content="GS" />
+                </WrapPanel>-->
+
+                <!--<gui:LabelDynamicValues2WithUnit x:Name="txtGroundspeed"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Width="82"
+                    gui:LabelProperties.Label="kts"
+                    BorderBrush="{gui:ThemeResource ResourceKey=PrimaryColorBrush9}"
+                    BorderThickness="2"
+                    Content="{Binding ElementName=HsiUserControl, Path=GroundSpeed, Converter={converters:RoundValueConverter}}"
+                    LeftAlign="True" />-->
+            </StackPanel>
+
+            <!--  Legends  -->
+            <WrapPanel
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom">
+                <Border
+                    Width="65"
+                    BorderBrush="Aqua"
+                    BorderThickness="0"
+                    Visibility="{Binding ElementName=HsiUserControl, Path=Nav1NameVisibility, Converter={converters:CollapseVisibilityValueConverter}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="18" />
+                        </Grid.ColumnDefinitions>
+                        <!--<gui:LabelH2
+                            Grid.Column="0"
+                            Margin="0,0,10,0"
+                            VerticalAlignment="Center"
+                            Content="{Binding ElementName=HsiUserControl, Path=Nav1Name}" />-->
+                        <Line
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Stroke="{Binding ElementName=HsiUserControl, Path=Nav1Color}"
+                            StrokeThickness="4"
+                            X1="0"
+                            X2="14"
+                            Y1="0"
+                            Y2="0" />
+                    </Grid>
+                </Border>
+                <Border
+                    Width="65"
+                    BorderBrush="Aqua"
+                    BorderThickness="0"
+                    Visibility="{Binding ElementName=HsiUserControl, Path=Nav2NameVisibility, Converter={converters:CollapseVisibilityValueConverter}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="18" />
+                        </Grid.ColumnDefinitions>
+                        <!--<gui:LabelH2
+                            Grid.Column="0"
+                            Margin="0,0,10,0"
+                            Content="{Binding ElementName=HsiUserControl, Path=Nav2Name}" />-->
+                        <Line
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Stroke="{Binding ElementName=HsiUserControl, Path=Nav2Color}"
+                            StrokeThickness="4"
+                            X1="0"
+                            X2="14"
+                            Y1="0"
+                            Y2="0" />
+                    </Grid>
+                </Border>
+                <Border
+                    Width="65"
+                    BorderBrush="Aqua"
+                    BorderThickness="0"
+                    Visibility="{Binding ElementName=HsiUserControl, Path=Nav3NameVisibility, Converter={converters:CollapseVisibilityValueConverter}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="18" />
+                        </Grid.ColumnDefinitions>
+                        <!--<gui:LabelH2
+                            Grid.Column="0"
+                            Margin="0,0,10,0"
+                            Content="{Binding ElementName=HsiUserControl, Path=Nav3Name}" />-->
+                        <Line
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Stroke="{Binding ElementName=HsiUserControl, Path=Nav3Color}"
+                            StrokeThickness="4"
+                            X1="0"
+                            X2="14"
+                            Y1="0"
+                            Y2="0" />
+                    </Grid>
+                </Border>
+                <Border
+                    Width="65"
+                    BorderBrush="Aqua"
+                    BorderThickness="0"
+                    Visibility="{Binding ElementName=HsiUserControl, Path=Nav4NameVisibility, Converter={converters:CollapseVisibilityValueConverter}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="18" />
+                        </Grid.ColumnDefinitions>
+                        <!--<gui:LabelH2
+                            Grid.Column="0"
+                            Margin="0,0,10,0"
+                            Content="{Binding ElementName=HsiUserControl, Path=Nav4Name}" />-->
+                        <Line
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Stroke="{Binding ElementName=HsiUserControl, Path=Nav4Color}"
+                            StrokeThickness="4"
+                            X1="0"
+                            X2="14"
+                            Y1="0"
+                            Y2="0" />
+                    </Grid>
+                </Border>
+            </WrapPanel>
+
+
+            <!--  ALT  -->
+            <StackPanel
+                Grid.Column="2"
+                HorizontalAlignment="Right">
+                <WrapPanel HorizontalAlignment="Left">
+                    <!--<gui:LabelH2 Content="ALT" />-->
+                </WrapPanel>
+
+                <!--<gui:LabelDynamicValues2WithUnit x:Name="txtAltitude"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Width="82"
+                    gui:LabelProperties.Label="ft"
+                    BorderBrush="{gui:ThemeResource ResourceKey=PrimaryColorBrush9}"
+                    BorderThickness="2"
+                    Content="{Binding ElementName=HsiUserControl, Path=Altitude, Converter={converters:FormatDoublelValueConverter}, ConverterParameter='0'}" />-->
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

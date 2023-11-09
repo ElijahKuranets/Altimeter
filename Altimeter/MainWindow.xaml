@@ -13,6 +13,7 @@
             <ColumnDefinition Width="*"/>
             <!-- Adjust the width as needed -->
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition />
             <!-- Adjust the width as needed -->
         </Grid.ColumnDefinitions>
 
@@ -23,6 +24,9 @@
         </Viewbox>
         <Viewbox Grid.Column="1" Margin="20">
             <sensors:SensorAdfUserControl/>
+        </Viewbox>
+        <Viewbox Grid.Column="2">
+            <sensors:HsiAdiMarkersUserControl />
         </Viewbox>
     </Grid>
 </Window>

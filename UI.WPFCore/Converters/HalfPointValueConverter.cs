@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Nsm.UI.WPF.Converters
+namespace UI.WPFCore.Converters
 {
     /// <summary>
     /// Converts a double to a Point where X and Y are equal and half the value of the input.
@@ -28,5 +28,4 @@ namespace Nsm.UI.WPF.Converters
             return this;
         }
     } 
-
 }

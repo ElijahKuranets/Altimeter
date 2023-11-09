@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Nsm.UI.WPF.Converters
+namespace UI.WPFCore.Converters
 {
     /// <summary>
     /// Converts a positive double value to Visibility.Visible. Otherwise Visibility.Collapsed.
