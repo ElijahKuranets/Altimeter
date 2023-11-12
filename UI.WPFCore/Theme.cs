@@ -147,7 +147,23 @@ namespace UI.WPFCore
                         graphColor2 = "#7F740E";
                         break;
                     }
+                case ThemeType.Metallic:
+                {
+                    primaryColor1 = "#e8e8e8"; 
+                    primaryColor2 = "#d0d0d0"; 
+                    primaryColor3 = "#b8b8b8"; 
+                    primaryColor4 = "#a0a0a0"; 
+                    primaryColor5 = "#888888"; 
+                    primaryColor6 = "#707070"; 
+                    primaryColor7 = "#585858"; 
+                    primaryColor8 = "#404040"; 
+                    primaryColor9 = "#282828"; 
+                    primaryColor10 = "#101010";
+
+                    break;
+                }
             }
+
 
             SetResource(ThemeResourceKey.PrimaryColor1.ToString(), ColorFromHex(primaryColor1));
             SetResource(ThemeResourceKey.PrimaryColor2.ToString(), ColorFromHex(primaryColor2));
@@ -342,7 +358,7 @@ namespace UI.WPFCore
             SetResource(ThemeResourceKey.ListMouseOverBackground.ToString(), GetResource(ThemeResourceKey.PrimaryColorBrush7));
             SetResource(ThemeResourceKey.ListMouseOverBorder.ToString(), GetResource(ThemeResourceKey.PrimaryColorBrush4));
 
-            //colors for different sattelites systems in GNSSkyView
+            //colors for different satellites systems in GNSSkyView
             SetResource(ThemeResourceKey.SatelliteGpsColor.ToString(), new SolidColorBrush(ColorFromHex("#00FFA3")));
             SetResource(ThemeResourceKey.SatelliteSBASColor.ToString(), new SolidColorBrush(ColorFromHex("#FFEB1B")));
             SetResource(ThemeResourceKey.SatelliteGlonassColor.ToString(), new SolidColorBrush(ColorFromHex("#FF537B")));

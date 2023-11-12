@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Shapes;
 using UI.WPFCore;
 
@@ -21,6 +22,8 @@ namespace Dev.Sensors
             var width = SensorAdfNeedle.Width;
             var height = SensorAdfNeedle.Height;
             DrawCompass(width, height);
+
+            //Arrow.Style = (Style)FindResource("PathStyleBody1");
         }
 
         public static readonly DependencyProperty RelativeBearingProperty = DependencyProperty.Register(
@@ -126,7 +129,14 @@ namespace Dev.Sensors
                 };
                 canvas.Children.Add(line);
 
-                Arrow.Fill = lineBrush;
+                //Arrow.Fill = lineBrush;
+                Arrow.Style = (Style) FindResource("PathStyleBody1");
+                Arrow.Effect = new DropShadowEffect
+                {
+                    BlurRadius = 10,
+                    Opacity = 0.5,
+                    ShadowDepth = 1
+                };
             }
         }
 
@@ -158,19 +168,21 @@ namespace Dev.Sensors
                 //    Style = (Style)FindResource("LabelStyleBody1"),
                 //};
 
-                var label = new TextBlock
+                var label = new Label()
                 {
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
-                    Text = str,
-                    Foreground = lineBrush,
-                    //Style = (Style)FindResource("LabelStyleBody1"),
+                    Content = str,
+                    //Foreground = lineBrush,
+                    Style = (Style)FindResource("LabelStyleBody1"),
+                    FontSize = 14
                 };
 
                 if (str is "N" or "E" or "S" or "W")
                 {
                     label.Foreground = Theme.GetResource(ThemeResourceKey.PrimaryColorBrush9) as SolidColorBrush;
                     label.FontWeight = FontWeights.Bold;
+                    label.FontSize = 18;
                 }
 
                 var borderTransformGroup = new TransformGroup();

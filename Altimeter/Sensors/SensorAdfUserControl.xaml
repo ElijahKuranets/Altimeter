@@ -30,11 +30,11 @@
                     </LinearGradientBrush>
                 </Ellipse.Fill>
             </Ellipse>
-        
+
             <Path x:Name="Arrow"
-                Width="250"
-                Height="250"
-                Data="M 40,124 190,124 190,115 210,125 190,135 190,126 40,126 Z" />
+                  Width="250"
+                  Height="250"
+                  Data="M 40,124 190,124 190,118 210,125 190,132 190,126 40,126 Z"/>
             <Border x:Name="BorderAircraft"
                 Width="250"
                 Height="250"

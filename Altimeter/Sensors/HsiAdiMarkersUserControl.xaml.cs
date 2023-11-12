@@ -17,7 +17,7 @@ namespace Dev.Sensors
     /// </remarks>
     public partial class HsiAdiMarkersUserControl : UserControl
     {
-        const double NeedleSpacingFromEdgde = 16;
+        const double NeedleSpacingFromEdge = 16;
 
         public enum LineType
         {
@@ -38,33 +38,33 @@ namespace Dev.Sensors
             InitializeComponent();
         }
 
-        private double widthHeight = 0;
+        private double _widthHeight;
 
-        private static SolidColorBrush transparentBrush = new(Colors.Transparent);
+        private static readonly SolidColorBrush transparentBrush = new(Colors.Transparent);
 
-        private double currentAngle;
-        private double totalAngle;
-        private double startAngle;
+        private double _currentAngle;
+        private double _totalAngle;
+        private double _startAngle;
 
-        bool dragStarted = false;
+        bool _dragStarted = false;
 
 
-        private static SolidColorBrush markerOffBrush = Theme.GetResource(ThemeResourceKey.PrimaryColorBrush9) as SolidColorBrush;
-        private static SolidColorBrush markerOuterBrush = new(Colors.LightBlue);
-        private static SolidColorBrush markerMiddleBrush = new(Color.FromRgb(255, 178, 0));
-        private static SolidColorBrush markerInnerBrush = new(Color.FromRgb(238, 238, 238));
+        private static readonly SolidColorBrush markerOffBrush = Theme.GetResource(ThemeResourceKey.PrimaryColorBrush9) as SolidColorBrush;
+        private static readonly SolidColorBrush markerOuterBrush = new(Colors.LightBlue);
+        private static readonly SolidColorBrush markerMiddleBrush = new(Color.FromRgb(255, 178, 0));
+        private static readonly SolidColorBrush markerInnerBrush = new(Color.FromRgb(238, 238, 238));
 
         private void borderCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var p = new System.Windows.Media.PointCollection();
+            var p = new PointCollection();
 
             var border = sender as Border;
 
             double wh;
             // Resize the canvas to be square
-            if (border.ActualWidth > border.ActualHeight ) // border.ActualHeight + 50
+            if (border!.ActualWidth > border.ActualHeight) // border.ActualHeight + 50
             {
-                var width = border.ActualWidth * (border.ActualHeight / border.ActualWidth + 0.15);
+                var width = border.ActualWidth * (border.ActualHeight / border.ActualWidth + 0.15); //+ 0.15
                 wh = Math.Min(width, width);
             }
             else
@@ -72,7 +72,7 @@ namespace Dev.Sensors
                 wh = Math.Min(border.ActualWidth, border.ActualHeight);
             }
 
-            widthHeight = wh;
+            _widthHeight = wh;
 
             SetCanvasWidth(this, wh);
             SetCanvasRect(this, new Rect(0, 0, wh, wh));
@@ -193,8 +193,8 @@ namespace Dev.Sensors
 
             for (var t = 0; t < 360; t += 30)
             {
-                double _angle = t + 45;
-                var trace = new RotateTransform(_angle, cx, cy);
+                double angle = t + 45;
+                var trace = new RotateTransform(angle, cx, cy);
 
                 borderTouchCanvas.Children.Add(new Polyline
                 {
@@ -224,7 +224,7 @@ namespace Dev.Sensors
                     Y1 = 0,
                     X2 = w / 2,
                     Y2 = t % 30 == 0 ? 12 : 8,
-                    Stroke = lineBrush,
+                    Style = (Style)FindResource("LineStyleBody1"),
                     StrokeThickness = 1,
                     RenderTransform = new RotateTransform(t, w / 2, w / 2)
                 });
@@ -306,25 +306,25 @@ namespace Dev.Sensors
                 {
                     case ArrowType.Closed:
                     case ArrowType.Open:
-                        gg.Children.Add(new LineGeometry(new Point(0, NeedleSpacingFromEdgde), new Point(0, widthHeight - NeedleSpacingFromEdgde)));
+                        gg.Children.Add(new LineGeometry(new Point(0, NeedleSpacingFromEdge), new Point(0, _widthHeight - NeedleSpacingFromEdge)));
                         break;
                     case ArrowType.OpenCircle:
                         gg.Children.Add(new LineGeometry(
-                            new Point(0, NeedleSpacingFromEdgde),
-                            new Point(0, NeedleSpacingFromEdgde + 8)));
+                            new Point(0, NeedleSpacingFromEdge),
+                            new Point(0, NeedleSpacingFromEdge + 8)));
 
                         gg.Children.Add(new LineGeometry(
-                            new Point(0, NeedleSpacingFromEdgde + 20),
-                            new Point(0, widthHeight - NeedleSpacingFromEdgde)));
+                            new Point(0, NeedleSpacingFromEdge + 20),
+                            new Point(0, _widthHeight - NeedleSpacingFromEdge)));
                         break;
                     case ArrowType.Diamond:
                         gg.Children.Add(new LineGeometry(
-                            new Point(0, NeedleSpacingFromEdgde),
-                            new Point(0, NeedleSpacingFromEdgde + 8)));
+                            new Point(0, NeedleSpacingFromEdge),
+                            new Point(0, NeedleSpacingFromEdge + 8)));
 
                         gg.Children.Add(new LineGeometry(
-                            new Point(0, NeedleSpacingFromEdgde + 24),
-                            new Point(0, widthHeight - NeedleSpacingFromEdgde)));
+                            new Point(0, NeedleSpacingFromEdge + 24),
+                            new Point(0, _widthHeight - NeedleSpacingFromEdge)));
                         break;
                 }
             }
@@ -334,45 +334,45 @@ namespace Dev.Sensors
                 {
                     case ArrowType.Closed:
                     case ArrowType.Open:
-                        var line1 = new LineGeometry(new Point(-2, 1 + NeedleSpacingFromEdgde), new Point(-2, widthHeight - NeedleSpacingFromEdgde));
-                        var line2 = new LineGeometry(new Point(2, 1 + NeedleSpacingFromEdgde), new Point(2, widthHeight - NeedleSpacingFromEdgde));
+                        var line1 = new LineGeometry(new Point(-2, 1 + NeedleSpacingFromEdge), new Point(-2, _widthHeight - NeedleSpacingFromEdge));
+                        var line2 = new LineGeometry(new Point(2, 1 + NeedleSpacingFromEdge), new Point(2, _widthHeight - NeedleSpacingFromEdge));
 
                         gg.Children.Add(line1);
                         gg.Children.Add(line2);
                         break;
                     case ArrowType.OpenCircle:
                         gg.Children.Add(new LineGeometry(
-                            new Point(-2, NeedleSpacingFromEdgde),
-                            new Point(-2, NeedleSpacingFromEdgde + 8)));
+                            new Point(-2, NeedleSpacingFromEdge),
+                            new Point(-2, NeedleSpacingFromEdge + 8)));
 
                         gg.Children.Add(new LineGeometry(
-                            new Point(-2, NeedleSpacingFromEdgde + 20),
-                            new Point(-2, widthHeight - NeedleSpacingFromEdgde)));
+                            new Point(-2, NeedleSpacingFromEdge + 20),
+                            new Point(-2, _widthHeight - NeedleSpacingFromEdge)));
 
                         gg.Children.Add(new LineGeometry(
-                            new Point(2, NeedleSpacingFromEdgde),
-                            new Point(2, NeedleSpacingFromEdgde + 8)));
+                            new Point(2, NeedleSpacingFromEdge),
+                            new Point(2, NeedleSpacingFromEdge + 8)));
 
                         gg.Children.Add(new LineGeometry(
-                            new Point(2, NeedleSpacingFromEdgde + 20),
-                            new Point(2, widthHeight - NeedleSpacingFromEdgde)));
+                            new Point(2, NeedleSpacingFromEdge + 20),
+                            new Point(2, _widthHeight - NeedleSpacingFromEdge)));
                         break;
                     case ArrowType.Diamond:
                         gg.Children.Add(new LineGeometry(
-                            new Point(-2, NeedleSpacingFromEdgde),
-                            new Point(-2, NeedleSpacingFromEdgde + 10)));
+                            new Point(-2, NeedleSpacingFromEdge),
+                            new Point(-2, NeedleSpacingFromEdge + 10)));
 
                         gg.Children.Add(new LineGeometry(
-                            new Point(-2, NeedleSpacingFromEdgde + 22),
-                            new Point(-2, widthHeight - NeedleSpacingFromEdgde)));
+                            new Point(-2, NeedleSpacingFromEdge + 22),
+                            new Point(-2, _widthHeight - NeedleSpacingFromEdge)));
 
                         gg.Children.Add(new LineGeometry(
-                            new Point(2, NeedleSpacingFromEdgde),
-                            new Point(2, NeedleSpacingFromEdgde + 10)));
+                            new Point(2, NeedleSpacingFromEdge),
+                            new Point(2, NeedleSpacingFromEdge + 10)));
 
                         gg.Children.Add(new LineGeometry(
-                            new Point(2, NeedleSpacingFromEdgde + 22),
-                            new Point(2, widthHeight - NeedleSpacingFromEdgde)));
+                            new Point(2, NeedleSpacingFromEdge + 22),
+                            new Point(2, _widthHeight - NeedleSpacingFromEdge)));
                         break;
                 }
             }
@@ -432,8 +432,8 @@ namespace Dev.Sensors
         {
             var gg = new GeometryGroup();
 
-            gg.Children.Add(new LineGeometry(new Point(0, NeedleSpacingFromEdgde), new Point(-6, 6 + NeedleSpacingFromEdgde)));
-            gg.Children.Add(new LineGeometry(new Point(0, NeedleSpacingFromEdgde), new Point(6, 6 + NeedleSpacingFromEdgde)));
+            gg.Children.Add(new LineGeometry(new Point(0, NeedleSpacingFromEdge), new Point(-6, 6 + NeedleSpacingFromEdge)));
+            gg.Children.Add(new LineGeometry(new Point(0, NeedleSpacingFromEdge), new Point(6, 6 + NeedleSpacingFromEdge)));
 
             return gg;
         }
@@ -447,10 +447,10 @@ namespace Dev.Sensors
 
             // Filled triangle
             path.Figures.Add(new PathFigure(
-                new Point(0, NeedleSpacingFromEdgde),
+                new Point(0, NeedleSpacingFromEdge),
                 new PathSegment[] {
-                    new LineSegment(new Point(-6, 6 + NeedleSpacingFromEdgde), true),
-                    new LineSegment(new Point(6, 6 + NeedleSpacingFromEdgde), true)}, true));
+                    new LineSegment(new Point(-6, 6 + NeedleSpacingFromEdge), true),
+                    new LineSegment(new Point(6, 6 + NeedleSpacingFromEdge), true)}, true));
 
             gg.Children.Add(path);
 
@@ -465,11 +465,11 @@ namespace Dev.Sensors
             path.Figures = new PathFigureCollection();
 
             path.Figures.Add(new PathFigure(
-                new Point(0, NeedleSpacingFromEdgde + 8),
+                new Point(0, NeedleSpacingFromEdge + 8),
                 new PathSegment[] {
-                    new LineSegment(new Point(-8, 8 + NeedleSpacingFromEdgde + 8), true),
-                    new LineSegment(new Point(0, 8 + NeedleSpacingFromEdgde + 16), true),
-                    new LineSegment(new Point(8, 8 + NeedleSpacingFromEdgde + 8), true) }, true));
+                    new LineSegment(new Point(-8, 8 + NeedleSpacingFromEdge + 8), true),
+                    new LineSegment(new Point(0, 8 + NeedleSpacingFromEdge + 16), true),
+                    new LineSegment(new Point(8, 8 + NeedleSpacingFromEdge + 8), true) }, true));
 
             gg.Children.Add(path);
 
@@ -480,7 +480,7 @@ namespace Dev.Sensors
         {
             var gg = new GeometryGroup();
 
-            gg.Children.Add(new EllipseGeometry(new Point(0, NeedleSpacingFromEdgde + 14), 6, 6));
+            gg.Children.Add(new EllipseGeometry(new Point(0, NeedleSpacingFromEdge + 14), 6, 6));
             return gg;
         }
     }
@@ -7234,7 +7234,7 @@ namespace Dev.Sensors
             RaiseEvent(args);
         }
         #endregion
-        
+
         #region TouchCanvas
 
         private void Canvas_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -7265,29 +7265,20 @@ namespace Dev.Sensors
 
         private void BorderTouchCanvas_OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (dragStarted)
+            if (_dragStarted)
             {
                 var mousePoint = e.GetPosition(this);
-                // Get the angle from horizontal to the
-                // vector between the center and the current point.
-
                 var new_angle = GetStartAngle(mousePoint, borderTouchCanvas);
+                _currentAngle = new_angle - _startAngle;
+                _currentAngle *= 180 / Math.PI;
+                _currentAngle += _totalAngle;
 
-                // Calculate the change in angle.
-                currentAngle = new_angle - startAngle;
-
-                // Convert to degrees.
-                currentAngle *= 180 / PI;
-
-                // Add to the previous total angle rotated.
-                currentAngle += totalAngle;
-
-                if (currentAngle < 359 && currentAngle > -0)
+                if (_currentAngle < 359 && _currentAngle > -0)
                 {
-                    var transformBorderTouchCanvas = new RotateTransform(currentAngle, borderTouchCanvas.Width / 2, borderTouchCanvas.Height / 2);
+                    var transformBorderTouchCanvas = new RotateTransform(_currentAngle, borderTouchCanvas.Width / 2, borderTouchCanvas.Height / 2);
                     borderTouchCanvas.RenderTransform = transformBorderTouchCanvas;
 
-                    var transformPrimaryNeedle = new RotateTransform(currentAngle, canvasPrimaryNeedle.Width / 2, canvasPrimaryNeedle.Height / 2);
+                    var transformPrimaryNeedle = new RotateTransform(_currentAngle, canvasPrimaryNeedle.Width / 2, canvasPrimaryNeedle.Height / 2);
                     canvasPrimaryNeedle.RenderTransform = transformPrimaryNeedle;
 
                     PrimaryNavCourse = transformBorderTouchCanvas.Angle;
@@ -7298,38 +7289,34 @@ namespace Dev.Sensors
                 }
                 else
                 {
-                    currentAngle = 0;
+                    _currentAngle = 0;
                 }
             }
         }
 
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
         {
-            dragStarted = false;
-
-            // Save the new total angle of rotation.
-            totalAngle = currentAngle;
-            totalAngle = PrimaryNavCourse;
+            _dragStarted = false;
+            _totalAngle = _currentAngle;
+            _totalAngle = PrimaryNavCourse;
         }
 
         private void BorderTouchCanvas_OnMouseDown(object sender, MouseEventArgs e)
         {
-            dragStarted = true;
-
+            _dragStarted = true;
             var mousePoint = e.GetPosition(this);
-
-            startAngle = GetStartAngle(mousePoint, borderTouchCanvas);
+            _startAngle = GetStartAngle(mousePoint, borderTouchCanvas);
         }
 
         private double GetStartAngle(Point point, Canvas canvas)
         {
             double dx = point.X - canvas.Width / 2;
             double dy = point.Y - canvas.Height / 2;
-
-            return Atan2(dy, dx);
+            return Math.Atan2(dy, dx);
         }
 
         #endregion
+
 
         #region ShowToIndicatorProperty
 
@@ -7451,7 +7438,7 @@ namespace Dev.Sensors
 
         public static readonly DependencyProperty ShowNAVsymbolProperty =
             DependencyProperty.Register(
-                "ShowNAVsymbol",
+                nameof(ShowNAVsymbol),
                 typeof(bool),
                 typeof(HsiAdiMarkersUserControl));
 
@@ -7463,7 +7450,7 @@ namespace Dev.Sensors
 
         public static readonly DependencyProperty ShowGPsymbolProperty =
             DependencyProperty.Register(
-                "ShowGPsymbol",
+                nameof(ShowGPsymbol),
                 typeof(bool),
                 typeof(HsiAdiMarkersUserControl));
 

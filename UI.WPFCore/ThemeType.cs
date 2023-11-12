@@ -3,6 +3,7 @@
     public enum ThemeType
     {
         Default,
+        Metallic,
         Green,
         Brown,
         Frozen,
