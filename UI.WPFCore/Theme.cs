@@ -4,34 +4,34 @@ using System.Windows.Media;
 
 namespace UI.WPFCore
 {
-    public sealed class Theme
+    public static class Theme
     {
-        private static readonly string aliceBlue = "#e7edf8";
-        private static readonly string linkWater = "#c7d4e1";
-        private static readonly string lightGrayishBlue = "#a7b6c8";
-        private static readonly string baliHai = "#8799af";
-        private static readonly string bermudaGrey = "#6f849c";
-        private static readonly string kashmirBlue = "#576f89";
-        private static readonly string mostlyDesaturatedDarkBlue = "#4a6179";
-        private static readonly string slateBlue = "#3b4e62";
-        private static readonly string deepBlue = "#2c3c4d";
-        private static readonly string midnightBlue = "#1a2836";
+        private const string AliceBlue = "#e7edf8";
+        private const string LinkWater = "#c7d4e1";
+        private const string LightGrayishBlue = "#a7b6c8";
+        private const string BaliHai = "#8799af";
+        private const string BermudaGrey = "#6f849c";
+        private const string KashmirBlue = "#576f89";
+        private const string MostlyDesaturatedDarkBlue = "#4a6179";
+        private const string SlateBlue = "#3b4e62";
+        private const string DeepBlue = "#2c3c4d";
+        private const string MidnightBlue = "#1a2836";
 
         [ThreadStatic]
-        private static ResourceDictionary? resourceDictionary;
+        private static ResourceDictionary? _resourceDictionary;
 
         internal static ResourceDictionary ResourceDictionary
         {
             get
             {
-                if (resourceDictionary != null)
+                if (_resourceDictionary != null)
                 {
-                    return resourceDictionary;
+                    return _resourceDictionary;
                 }
 
-                resourceDictionary = new ResourceDictionary();
+                _resourceDictionary = new ResourceDictionary();
                 LoadThemeType(ThemeType.Default);
-                return resourceDictionary;
+                return _resourceDictionary;
             }
         }
 
@@ -51,16 +51,16 @@ namespace UI.WPFCore
             // ****************************************
             // Styleguide Primary Colors
             // ****************************************            
-            var primaryColor1 = aliceBlue;
-            var primaryColor2 = linkWater;
-            var primaryColor3 = lightGrayishBlue;
-            var primaryColor4 = baliHai;
-            var primaryColor5 = bermudaGrey;
-            var primaryColor6 = kashmirBlue;
-            var primaryColor7 = mostlyDesaturatedDarkBlue;
-            var primaryColor8 = slateBlue;
-            var primaryColor9 = deepBlue;
-            var primaryColor10 = midnightBlue;
+            var primaryColor1 = AliceBlue;
+            var primaryColor2 = LinkWater;
+            var primaryColor3 = LightGrayishBlue;
+            var primaryColor4 = BaliHai;
+            var primaryColor5 = BermudaGrey;
+            var primaryColor6 = KashmirBlue;
+            var primaryColor7 = MostlyDesaturatedDarkBlue;
+            var primaryColor8 = SlateBlue;
+            var primaryColor9 = DeepBlue;
+            var primaryColor10 = MidnightBlue;
 
             var secondaryColor1 = "#6bb2ff";
             var secondaryColor2 = "#00ffa3";
@@ -201,7 +201,7 @@ namespace UI.WPFCore
 
             SetResource(ThemeResourceKey.RegularTextColor.ToString(), new SolidColorBrush(ColorFromHex("#c7d4e1")));
             SetResource(ThemeResourceKey.DynamicTextColor.ToString(), new SolidColorBrush(ColorFromHex("#6bb2ff")));
-            SetResource(ThemeResourceKey.ActiveTextColor.ToString(), new SolidColorBrush(ColorFromHex(aliceBlue)));
+            SetResource(ThemeResourceKey.ActiveTextColor.ToString(), new SolidColorBrush(ColorFromHex(AliceBlue)));
             SetResource(ThemeResourceKey.InfoTextColor.ToString(), new SolidColorBrush(ColorFromHex("#A0B0C2")));
 
 
@@ -396,31 +396,31 @@ namespace UI.WPFCore
                     {
                         // Override font colors
                         // SetResource(ThemeResourceKey.H1FontColor.ToString(), GetResource(ThemeResourceKey.PrimaryColorBrush3));
-                        SetResource(ThemeResourceKey.H1FontColor.ToString(), new SolidColorBrush((Color)ColorFromHex("#BB86FC")));
+                        SetResource(ThemeResourceKey.H1FontColor.ToString(), new SolidColorBrush(ColorFromHex("#BB86FC")));
 
                         // SetResource(ThemeResourceKey.H2FontColor.ToString(), GetResource(ThemeResourceKey.PrimaryColorBrush4));
-                        SetResource(ThemeResourceKey.H2FontColor.ToString(), new SolidColorBrush((Color)ColorFromHex("#7F39FB")));
+                        SetResource(ThemeResourceKey.H2FontColor.ToString(), new SolidColorBrush(ColorFromHex("#7F39FB")));
 
                         // SetResource(ThemeResourceKey.H3FontColor.ToString(), GetResource(ThemeResourceKey.PrimaryColorBrush5));
-                        SetResource(ThemeResourceKey.H3FontColor.ToString(), new SolidColorBrush((Color)ColorFromHex("#6200EE")));
+                        SetResource(ThemeResourceKey.H3FontColor.ToString(), new SolidColorBrush(ColorFromHex("#6200EE")));
 
                         // SetResource(ThemeResourceKey.Body1FontColor.ToString(), GetResource(ThemeResourceKey.PrimaryColorBrush2));
-                        SetResource(ThemeResourceKey.Body1FontColor.ToString(), new SolidColorBrush((Color)ColorFromHex("#BB86FC")));
+                        SetResource(ThemeResourceKey.Body1FontColor.ToString(), new SolidColorBrush(ColorFromHex("#BB86FC")));
 
                         // SetResource(ThemeResourceKey.Body2FontColor.ToString(), GetResource(ThemeResourceKey.PrimaryColorBrush2));
-                        SetResource(ThemeResourceKey.Body2FontColor.ToString(), new SolidColorBrush((Color)ColorFromHex("#BB86FC")));
+                        SetResource(ThemeResourceKey.Body2FontColor.ToString(), new SolidColorBrush(ColorFromHex("#BB86FC")));
 
                         // SetResource(ThemeResourceKey.Values1FontColor.ToString(), GetResource(ThemeResourceKey.PrimaryColorBrush1));
-                        SetResource(ThemeResourceKey.Values1FontColor.ToString(), new SolidColorBrush((Color)ColorFromHex("#DBB2FF")));
+                        SetResource(ThemeResourceKey.Values1FontColor.ToString(), new SolidColorBrush(ColorFromHex("#DBB2FF")));
 
                         // SetResource(ThemeResourceKey.Values2FontColor.ToString(), GetResource(ThemeResourceKey.PrimaryColorBrush2));
-                        SetResource(ThemeResourceKey.Values2FontColor.ToString(), new SolidColorBrush((Color)ColorFromHex("#BB86FC")));
+                        SetResource(ThemeResourceKey.Values2FontColor.ToString(), new SolidColorBrush(ColorFromHex("#BB86FC")));
 
                         // SetResource(ThemeResourceKey.Button1FontColor.ToString(), GetResource(ThemeResourceKey.PrimaryColorBrush1));
-                        SetResource(ThemeResourceKey.Button1FontColor.ToString(), new SolidColorBrush((Color)ColorFromHex("#BB86FC")));
+                        SetResource(ThemeResourceKey.Button1FontColor.ToString(), new SolidColorBrush(ColorFromHex("#BB86FC")));
 
                         // SetResource(ThemeResourceKey.Button2FontColor.ToString(), GetResource(ThemeResourceKey.PrimaryColorBrush1));
-                        SetResource(ThemeResourceKey.Button2FontColor.ToString(), new SolidColorBrush((Color)ColorFromHex("#BB86FC")));
+                        SetResource(ThemeResourceKey.Button2FontColor.ToString(), new SolidColorBrush(ColorFromHex("#BB86FC")));
 
                         //SetResource(ThemeResourceKey.RegularTextColor.ToString(), new SolidColorBrush(ColorFromHex("#c7d4e1")));
                         //SetResource(ThemeResourceKey.DynamicTextColor.ToString(), new SolidColorBrush(ColorFromHex("#6bb2ff")));
@@ -436,7 +436,7 @@ namespace UI.WPFCore
             }
         }
 
-        public static object? GetResource(ThemeResourceKey resourceKey)
+        public static object?GetResource(ThemeResourceKey resourceKey)
         {
             return ResourceDictionary.Contains(resourceKey.ToString()) ?
                 ResourceDictionary[resourceKey.ToString()] : null;
@@ -460,11 +460,10 @@ namespace UI.WPFCore
                 EndPoint = new Point(1, 0.5),
                 GradientStops = new GradientStopCollection
                     {
-                        new GradientStop { Offset = 0, Color = ColorFromHex("#FF833AB4") },
-                        new GradientStop { Offset = 1, Color = ColorFromHex("#FFFD1D1D") }
+                        new() { Offset = 0, Color = ColorFromHex("#FF833AB4") },
+                        new() { Offset = 1, Color = ColorFromHex("#FFFD1D1D") }
                     }
             };
         }
-
     }
 }

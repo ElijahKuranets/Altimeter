@@ -1,4 +1,4 @@
-﻿<Window x:Class="Altimeter.MainWindow"
+﻿<Window x:Class="Dev.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:gui="clr-namespace:UI.WPFCore;assembly=UI.WPFCore"

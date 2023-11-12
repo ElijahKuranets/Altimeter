@@ -10,9 +10,9 @@ namespace Dev.Sensors
     /// <summary>
     /// Interaction logic for SensorAdfUserControl.xaml
     /// </summary>
-    public partial class SensorAdfUserControl : UserControl
+    public partial class SensorAdfUserControl
     {
-        public static int MaxMark = 12;
+        private const int MaxMark = 12;
         private const int Division = 60;
         public const int MaxValue = 360;
 
@@ -109,7 +109,7 @@ namespace Dev.Sensors
 
         private void DrawTicks(Panel canvas, double w, double h)
         {
-            var lineBrush = Theme.GetResource(ThemeResourceKey.PrimaryColorBrush2) as SolidColorBrush;
+            //var lineBrush = Theme.GetResource(ThemeResourceKey.PrimaryColorBrush2) as SolidColorBrush;
 
             for (var i = 0; i < Division; i++)
             {
@@ -142,7 +142,7 @@ namespace Dev.Sensors
 
         private void DrawNumbers(Panel canvas, double w, double h)
         {
-            var lineBrush = Theme.GetResource(ThemeResourceKey.PrimaryColorBrush2) as SolidColorBrush;
+            //var lineBrush = Theme.GetResource(ThemeResourceKey.PrimaryColorBrush2) as SolidColorBrush;
             var angle = 0;
 
             foreach (var str in new[] { "N", "3", "6", "E", "12", "15", "S", "21", "24", "W", "30", "33" })

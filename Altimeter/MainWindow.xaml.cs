@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Altimeter
+namespace Dev
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

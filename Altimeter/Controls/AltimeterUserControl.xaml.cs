@@ -10,7 +10,7 @@ namespace Dev.Controls
     /// <summary>
     /// Interaction logic for AltimeterUserControl.xaml
     /// </summary>
-    public partial class AltimeterUserControl : UserControl
+    public partial class AltimeterUserControl
     {
         private Path _bigHandPath;
         private Path _smallHandPath;
@@ -31,7 +31,7 @@ namespace Dev.Controls
         public static readonly DependencyProperty BoardWidthProperty =
             DependencyProperty.Register(nameof(AltimeterWidth), typeof(string), typeof(AltimeterUserControl));
         public static readonly DependencyProperty AltitudeProperty = DependencyProperty.Register(
-            nameof(AltitudeValue), typeof(float), typeof(AltimeterUserControl), new PropertyMetadata(default(float), ValuePropertyChangedCallback));
+            nameof(AltitudeValue), typeof(double), typeof(AltimeterUserControl), new PropertyMetadata(default(double), ValuePropertyChangedCallback));
         #endregion
 
         #region altimeter properties
@@ -46,9 +46,9 @@ namespace Dev.Controls
             get => (string)GetValue(BoardWidthProperty);
             set => SetValue(BoardWidthProperty, value);
         }
-        public float AltitudeValue
+        public double AltitudeValue
         {
-            get => (float)GetValue(AltitudeProperty);
+            get => (double)GetValue(AltitudeProperty);
             set => SetCurrentValue(AltitudeProperty, value);
         }
         #endregion
@@ -58,7 +58,7 @@ namespace Dev.Controls
         private static void ValuePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = (AltimeterUserControl)d;
-            var value = (float)e.NewValue;
+            var value = (double)e.NewValue;
 
             var bigHandAngle = value / (MaxValue / 360.0);
             var smallHandAngle = (value % 1000) * ((MaxMark * 360.0) / MaxValue);

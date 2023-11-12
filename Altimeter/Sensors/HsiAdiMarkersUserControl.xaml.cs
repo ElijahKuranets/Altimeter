@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -46,7 +47,7 @@ namespace Dev.Sensors
         private double _totalAngle;
         private double _startAngle;
 
-        bool _dragStarted = false;
+        private bool _dragStarted = false;
 
 
         private static readonly SolidColorBrush markerOffBrush = Theme.GetResource(ThemeResourceKey.PrimaryColorBrush9) as SolidColorBrush;
@@ -263,7 +264,7 @@ namespace Dev.Sensors
 
         private PointCollection CreatePrimaryNeedleDeviationPointCollection()
         {
-            return new PointCollection(new Point[] {
+            return new PointCollection(new[] {
                 new Point(0,56),
                 new Point(0,CanvasWidth-56)
             });
@@ -271,7 +272,7 @@ namespace Dev.Sensors
 
         private PointCollection CreatePrimaryRefNeedleDeviationPointCollection()
         {
-            return new PointCollection(new Point[] {
+            return new PointCollection(new[] {
                 new Point(0,66),
                 new Point(0,CanvasWidth-66)
             });
@@ -488,7 +489,7 @@ namespace Dev.Sensors
     /// <summary>
     /// HsiAdiMarkersUserControl partial class for all user control properties
     /// </summary>
-    public partial class HsiAdiMarkersUserControl : UserControl
+    public partial class HsiAdiMarkersUserControl
     {
         #region PrimaryNavVisibilityProperty
 
@@ -497,7 +498,7 @@ namespace Dev.Sensors
           "PrimaryNavVisibility",
           typeof(Visibility),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(Visibility.Visible, new PropertyChangedCallback(OnPrimaryNavVisibilityValueChanged)));
+                new FrameworkPropertyMetadata(Visibility.Visible, OnPrimaryNavVisibilityValueChanged));
 
 
         public Visibility PrimaryNavVisibility
@@ -555,7 +556,7 @@ namespace Dev.Sensors
           "PrimaryNavRefGpDeviation",
           typeof(double),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(0.0, new PropertyChangedCallback(OnPrimaryNavRefGpDeviationValueChanged)));
+                new FrameworkPropertyMetadata(0.0, OnPrimaryNavRefGpDeviationValueChanged));
 
 
         public double PrimaryNavRefGpDeviation
@@ -613,7 +614,7 @@ namespace Dev.Sensors
           "PrimaryNavGpDeviation",
           typeof(double),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(0.0, new PropertyChangedCallback(OnPrimaryNavGpDeviationValueChanged)));
+                defaultMetadata: new FrameworkPropertyMetadata(0.0, new PropertyChangedCallback(OnPrimaryNavGpDeviationValueChanged)));
 
 
         public double PrimaryNavGpDeviation
@@ -672,7 +673,7 @@ namespace Dev.Sensors
           "PrimaryNavName",
           typeof(string),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(string.Empty, new PropertyChangedCallback(OnPrimaryNavNameValueChanged)));
+                new FrameworkPropertyMetadata(string.Empty, OnPrimaryNavNameValueChanged));
 
 
         public string PrimaryNavName
@@ -731,7 +732,7 @@ namespace Dev.Sensors
           "DistanceSelected",
           typeof(string),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(string.Empty, new PropertyChangedCallback(OnDistanceSelectedValueChanged)));
+                new FrameworkPropertyMetadata(string.Empty, OnDistanceSelectedValueChanged));
 
 
         public string DistanceSelected
@@ -790,7 +791,7 @@ namespace Dev.Sensors
           "PrimaryNavDeviation",
           typeof(double),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(0.0, new PropertyChangedCallback(OnPrimaryNavDeviationValueChanged)));
+                new FrameworkPropertyMetadata(0.0, OnPrimaryNavDeviationValueChanged));
 
 
         public double PrimaryNavDeviation
@@ -849,7 +850,7 @@ namespace Dev.Sensors
           "PrimaryNavRefDeviation",
           typeof(double),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(0.0, new PropertyChangedCallback(OnPrimaryNavRefDeviationValueChanged)));
+                new FrameworkPropertyMetadata(0.0, OnPrimaryNavRefDeviationValueChanged));
 
 
         public double PrimaryNavRefDeviation
@@ -908,7 +909,7 @@ namespace Dev.Sensors
           "PrimaryNavCourse",
           typeof(double),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(0.0, new PropertyChangedCallback(OnPrimaryNavCourseValueChanged)));
+                new FrameworkPropertyMetadata(0.0, OnPrimaryNavCourseValueChanged));
 
 
         public double PrimaryNavCourse
@@ -968,7 +969,7 @@ namespace Dev.Sensors
           "PrimaryNavCourseCompass",
           typeof(double),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(0.0, new PropertyChangedCallback(OnPrimaryNavCourseCompassValueChanged)));
+                new FrameworkPropertyMetadata(0.0, OnPrimaryNavCourseCompassValueChanged));
 
 
         public double PrimaryNavCourseCompass
@@ -1027,7 +1028,7 @@ namespace Dev.Sensors
           "PrimaryNavRefVisibility",
           typeof(Visibility),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(Visibility.Visible, new PropertyChangedCallback(OnPrimaryNavRefVisibilityValueChanged)));
+                new FrameworkPropertyMetadata(Visibility.Visible, OnPrimaryNavRefVisibilityValueChanged));
 
 
         public Visibility PrimaryNavRefVisibility
@@ -1086,7 +1087,7 @@ namespace Dev.Sensors
           "OutBoundInboundTxt",
           typeof(string),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(string.Empty, new PropertyChangedCallback(OnOutBoundInboundTxtValueChanged)));
+                new FrameworkPropertyMetadata(string.Empty, OnOutBoundInboundTxtValueChanged));
 
 
         public string OutBoundInboundTxt
@@ -1145,7 +1146,7 @@ namespace Dev.Sensors
           "ShowOutboundInBound",
           typeof(bool),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(true, new PropertyChangedCallback(OnShowOutboundInBoundValueChanged)));
+                new FrameworkPropertyMetadata(true, OnShowOutboundInBoundValueChanged));
 
 
         public bool ShowOutboundInBound
@@ -1263,7 +1264,7 @@ namespace Dev.Sensors
           "ShowLateralGuidance",
           typeof(bool),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(true, new PropertyChangedCallback(OnShowLateralGuidanceValueChanged)));
+                new FrameworkPropertyMetadata(true, OnShowLateralGuidanceValueChanged));
 
 
         public bool ShowLateralGuidance
@@ -1499,7 +1500,7 @@ namespace Dev.Sensors
           "Nav1Visibility",
           typeof(Visibility),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(Visibility.Hidden, new PropertyChangedCallback(OnNav1VisibilityValueChanged)));
+                new FrameworkPropertyMetadata(Visibility.Hidden, OnNav1VisibilityValueChanged));
 
 
         public Visibility Nav1Visibility
@@ -1620,7 +1621,7 @@ namespace Dev.Sensors
           "Nav1Name",
           typeof(string),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(string.Empty, new PropertyChangedCallback(OnNav1NameValueChanged)));
+                new FrameworkPropertyMetadata(string.Empty, OnNav1NameValueChanged));
 
 
         public string Nav1Name
@@ -3330,13 +3331,13 @@ namespace Dev.Sensors
         /// </summary>
         public static readonly RoutedEvent Nav2DataValueChangedEvent = EventManager.RegisterRoutedEvent(
           "Nav2DataValueChanged", RoutingStrategy.Bubble,
-          typeof(RoutedPropertyChangedEventHandler<System.Windows.Media.Geometry>), typeof(HsiAdiMarkersUserControl));
+          typeof(RoutedPropertyChangedEventHandler<Geometry>), typeof(HsiAdiMarkersUserControl));
 
         /// <summary>
         /// Raises the ValueChanged event.
         /// </summary>
         /// <param name="args">Arguments associated with the ValueChanged event.</param>
-        protected virtual void OnNav2DataValueChanged(RoutedPropertyChangedEventArgs<System.Windows.Media.Geometry> args)
+        protected virtual void OnNav2DataValueChanged(RoutedPropertyChangedEventArgs<Geometry> args)
         {
             RaiseEvent(args);
         }
@@ -3347,29 +3348,29 @@ namespace Dev.Sensors
         internal static readonly DependencyProperty Nav22DataProperty =
         DependencyProperty.RegisterAttached(
           "Nav22Data",
-          typeof(System.Windows.Media.Geometry),
+          typeof(Geometry),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(null, new PropertyChangedCallback(OnNav22DataValueChanged)));
+                new FrameworkPropertyMetadata(null, OnNav22DataValueChanged));
 
 
-        internal System.Windows.Media.Geometry Nav22Data
+        internal Geometry Nav22Data
         {
-            get => (System.Windows.Media.Geometry)GetValue(Nav22DataProperty);
+            get => (Geometry)GetValue(Nav22DataProperty);
             set => SetValue(Nav22DataProperty, value);
         }
 
         /// <summary>
         /// Gets the Icon.
         /// </summary>
-        internal static System.Windows.Media.Geometry GetNav22Data(DependencyObject obj)
+        internal static Geometry GetNav22Data(DependencyObject obj)
         {
-            return (System.Windows.Media.Geometry)obj.GetValue(Nav22DataProperty);
+            return (Geometry)obj.GetValue(Nav22DataProperty);
         }
 
         /// <summary>
         /// Sets the Icon.
         /// </summary>
-        internal static void SetNav22Data(DependencyObject obj, System.Windows.Media.Geometry value)
+        internal static void SetNav22Data(DependencyObject obj, Geometry value)
         {
             obj.SetValue(Nav22DataProperty, value);
         }
@@ -3378,8 +3379,8 @@ namespace Dev.Sensors
         {
             var control = (HsiAdiMarkersUserControl)obj;
 
-            var e = new RoutedPropertyChangedEventArgs<System.Windows.Media.Geometry>(
-              (System.Windows.Media.Geometry)args.OldValue, (System.Windows.Media.Geometry)args.NewValue, Nav22DataValueChangedEvent);
+            var e = new RoutedPropertyChangedEventArgs<Geometry>(
+              (Geometry)args.OldValue, (Geometry)args.NewValue, Nav22DataValueChangedEvent);
 
             control.OnNav22DataValueChanged(e);
         }
@@ -3389,13 +3390,13 @@ namespace Dev.Sensors
         /// </summary>
         public static readonly RoutedEvent Nav22DataValueChangedEvent = EventManager.RegisterRoutedEvent(
           "Nav22DataValueChanged", RoutingStrategy.Bubble,
-          typeof(RoutedPropertyChangedEventHandler<System.Windows.Media.Geometry>), typeof(HsiAdiMarkersUserControl));
+          handlerType: typeof(RoutedPropertyChangedEventHandler<Geometry>), typeof(HsiAdiMarkersUserControl));
 
         /// <summary>
         /// Raises the ValueChanged event.
         /// </summary>
         /// <param name="args">Arguments associated with the ValueChanged event.</param>
-        protected virtual void OnNav22DataValueChanged(RoutedPropertyChangedEventArgs<System.Windows.Media.Geometry> args)
+        protected virtual void OnNav22DataValueChanged(RoutedPropertyChangedEventArgs<Geometry> args)
         {
             RaiseEvent(args);
         }
@@ -3408,7 +3409,7 @@ namespace Dev.Sensors
           "Nav3Visibility",
           typeof(Visibility),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(Visibility.Hidden, new PropertyChangedCallback(OnNav3VisibilityValueChanged)));
+                new FrameworkPropertyMetadata(Visibility.Hidden, OnNav3VisibilityValueChanged));
 
 
         public Visibility Nav3Visibility
@@ -3468,7 +3469,7 @@ namespace Dev.Sensors
           "Nav32Visibility",
           typeof(Visibility),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(Visibility.Hidden, new PropertyChangedCallback(OnNav32VisibilityValueChanged)));
+                new FrameworkPropertyMetadata(Visibility.Hidden, OnNav32VisibilityValueChanged));
 
 
         public Visibility Nav32Visibility
@@ -3528,7 +3529,7 @@ namespace Dev.Sensors
           "Nav3Name",
           typeof(string),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(string.Empty, new PropertyChangedCallback(OnNav3NameValueChanged)));
+                new FrameworkPropertyMetadata(string.Empty, OnNav3NameValueChanged));
 
 
         public string Nav3Name
@@ -3587,7 +3588,7 @@ namespace Dev.Sensors
           "Nav32Name",
           typeof(string),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(string.Empty, new PropertyChangedCallback(OnNav32NameValueChanged)));
+                new FrameworkPropertyMetadata(string.Empty, OnNav32NameValueChanged));
 
 
         public string Nav32Name
@@ -3646,7 +3647,7 @@ namespace Dev.Sensors
           "Nav3Bearing",
           typeof(double),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(0.0, new PropertyChangedCallback(OnNav3BearingValueChanged)));
+                new FrameworkPropertyMetadata(0.0, OnNav3BearingValueChanged));
 
 
         public double Nav3Bearing
@@ -3705,7 +3706,7 @@ namespace Dev.Sensors
           "Nav32Bearing",
           typeof(double),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(0.0, new PropertyChangedCallback(OnNav32BearingValueChanged)));
+                new FrameworkPropertyMetadata(0.0, OnNav32BearingValueChanged));
 
 
         public double Nav32Bearing
@@ -3764,7 +3765,7 @@ namespace Dev.Sensors
           "Nav3Color",
           typeof(Brush),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(new SolidColorBrush(Colors.White), new PropertyChangedCallback(OnNav3ColorValueChanged)));
+                new FrameworkPropertyMetadata(new SolidColorBrush(Colors.White), OnNav3ColorValueChanged));
 
 
         public Brush Nav3Color
@@ -3823,7 +3824,7 @@ namespace Dev.Sensors
           "Nav32Color",
           typeof(Brush),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(new SolidColorBrush(Colors.White), new PropertyChangedCallback(OnNav32ColorValueChanged)));
+                new FrameworkPropertyMetadata(new SolidColorBrush(Colors.White), OnNav32ColorValueChanged));
 
 
         public Brush Nav32Color
@@ -3882,7 +3883,7 @@ namespace Dev.Sensors
           "Nav3NeedleLineType",
           typeof(LineType),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(LineType.Single, new PropertyChangedCallback(OnNav3NeedleLineTypeValueChanged)));
+                new FrameworkPropertyMetadata(LineType.Single, OnNav3NeedleLineTypeValueChanged));
 
 
         public LineType Nav3NeedleLineType
@@ -3943,7 +3944,7 @@ namespace Dev.Sensors
           "Nav32NeedleLineType",
           typeof(LineType),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(LineType.Single, new PropertyChangedCallback(OnNav32NeedleLineTypeValueChanged)));
+                new FrameworkPropertyMetadata(LineType.Single, OnNav32NeedleLineTypeValueChanged));
 
 
         public LineType Nav32NeedleLineType
@@ -4004,7 +4005,7 @@ namespace Dev.Sensors
           "Nav3ArrowType",
           typeof(ArrowType),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(ArrowType.Open, new PropertyChangedCallback(OnNav3ArrowTypeValueChanged)));
+                new FrameworkPropertyMetadata(ArrowType.Open, OnNav3ArrowTypeValueChanged));
 
 
         public ArrowType Nav3ArrowType
@@ -4065,7 +4066,7 @@ namespace Dev.Sensors
           "Nav32ArrowType",
           typeof(ArrowType),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(ArrowType.Open, new PropertyChangedCallback(OnNav32ArrowTypeValueChanged)));
+                new FrameworkPropertyMetadata(ArrowType.Open, OnNav32ArrowTypeValueChanged));
 
 
         public ArrowType Nav32ArrowType
@@ -4126,7 +4127,7 @@ namespace Dev.Sensors
           "Nav3NeedleLineThickness",
           typeof(double),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(2.0, new PropertyChangedCallback(OnNav3NeedleLineThicknessValueChanged)));
+                new FrameworkPropertyMetadata(2.0, OnNav3NeedleLineThicknessValueChanged));
 
 
         internal double Nav3NeedleLineThickness
@@ -4185,7 +4186,7 @@ namespace Dev.Sensors
           "Nav32NeedleLineThickness",
           typeof(double),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(2.0, new PropertyChangedCallback(OnNav32NeedleLineThicknessValueChanged)));
+                new FrameworkPropertyMetadata(2.0, OnNav32NeedleLineThicknessValueChanged));
 
 
         internal double Nav32NeedleLineThickness
@@ -4242,29 +4243,29 @@ namespace Dev.Sensors
         internal static readonly DependencyProperty Nav3DataProperty =
         DependencyProperty.RegisterAttached(
           "Nav3Data",
-          typeof(System.Windows.Media.Geometry),
+          typeof(Geometry),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(null, new PropertyChangedCallback(OnNav3DataValueChanged)));
+                new FrameworkPropertyMetadata(null, OnNav3DataValueChanged));
 
 
-        internal System.Windows.Media.Geometry Nav3Data
+        internal Geometry Nav3Data
         {
-            get => (System.Windows.Media.Geometry)GetValue(Nav3DataProperty);
+            get => (Geometry)GetValue(Nav3DataProperty);
             set => SetValue(Nav3DataProperty, value);
         }
 
         /// <summary>
         /// Gets the Icon.
         /// </summary>
-        internal static System.Windows.Media.Geometry GetNav3Data(DependencyObject obj)
+        internal static Geometry GetNav3Data(DependencyObject obj)
         {
-            return (System.Windows.Media.Geometry)obj.GetValue(Nav3DataProperty);
+            return (Geometry)obj.GetValue(Nav3DataProperty);
         }
 
         /// <summary>
         /// Sets the Icon.
         /// </summary>
-        internal static void SetNav3Data(DependencyObject obj, System.Windows.Media.Geometry value)
+        internal static void SetNav3Data(DependencyObject obj, Geometry value)
         {
             obj.SetValue(Nav3DataProperty, value);
         }
@@ -4273,8 +4274,8 @@ namespace Dev.Sensors
         {
             var control = (HsiAdiMarkersUserControl)obj;
 
-            var e = new RoutedPropertyChangedEventArgs<System.Windows.Media.Geometry>(
-              (System.Windows.Media.Geometry)args.OldValue, (System.Windows.Media.Geometry)args.NewValue, Nav3DataValueChangedEvent);
+            var e = new RoutedPropertyChangedEventArgs<Geometry>(
+              (Geometry)args.OldValue, (Geometry)args.NewValue, Nav3DataValueChangedEvent);
 
             control.OnNav3DataValueChanged(e);
         }
@@ -4284,13 +4285,13 @@ namespace Dev.Sensors
         /// </summary>
         public static readonly RoutedEvent Nav3DataValueChangedEvent = EventManager.RegisterRoutedEvent(
           "Nav3DataValueChanged", RoutingStrategy.Bubble,
-          typeof(RoutedPropertyChangedEventHandler<System.Windows.Media.Geometry>), typeof(HsiAdiMarkersUserControl));
+          typeof(RoutedPropertyChangedEventHandler<Geometry>), typeof(HsiAdiMarkersUserControl));
 
         /// <summary>
         /// Raises the ValueChanged event.
         /// </summary>
         /// <param name="args">Arguments associated with the ValueChanged event.</param>
-        protected virtual void OnNav3DataValueChanged(RoutedPropertyChangedEventArgs<System.Windows.Media.Geometry> args)
+        protected virtual void OnNav3DataValueChanged(RoutedPropertyChangedEventArgs<Geometry> args)
         {
             RaiseEvent(args);
         }
@@ -4301,23 +4302,23 @@ namespace Dev.Sensors
         internal static readonly DependencyProperty Nav32DataProperty =
         DependencyProperty.RegisterAttached(
           "Nav32Data",
-          typeof(System.Windows.Media.Geometry),
+          typeof(Geometry),
           typeof(HsiAdiMarkersUserControl),
                 new FrameworkPropertyMetadata(null, new PropertyChangedCallback(OnNav32DataValueChanged)));
 
 
-        internal System.Windows.Media.Geometry Nav32Data
+        internal Geometry Nav32Data
         {
-            get => (System.Windows.Media.Geometry)GetValue(Nav32DataProperty);
+            get => (Geometry)GetValue(Nav32DataProperty);
             set => SetValue(Nav32DataProperty, value);
         }
 
         /// <summary>
         /// Gets the Icon.
         /// </summary>
-        internal static System.Windows.Media.Geometry GetNav32Data(DependencyObject obj)
+        internal static Geometry GetNav32Data(DependencyObject obj)
         {
-            return (System.Windows.Media.Geometry)obj.GetValue(Nav32DataProperty);
+            return (Geometry)obj.GetValue(Nav32DataProperty);
         }
 
         /// <summary>
@@ -4332,8 +4333,8 @@ namespace Dev.Sensors
         {
             var control = (HsiAdiMarkersUserControl)obj;
 
-            var e = new RoutedPropertyChangedEventArgs<System.Windows.Media.Geometry>(
-              (System.Windows.Media.Geometry)args.OldValue, (System.Windows.Media.Geometry)args.NewValue, Nav32DataValueChangedEvent);
+            var e = new RoutedPropertyChangedEventArgs<Geometry>(
+              (System.Windows.Media.Geometry)args.OldValue, (Geometry)args.NewValue, Nav32DataValueChangedEvent);
 
             control.OnNav32DataValueChanged(e);
         }
@@ -4343,13 +4344,13 @@ namespace Dev.Sensors
         /// </summary>
         public static readonly RoutedEvent Nav32DataValueChangedEvent = EventManager.RegisterRoutedEvent(
           "Nav32DataValueChanged", RoutingStrategy.Bubble,
-          typeof(RoutedPropertyChangedEventHandler<System.Windows.Media.Geometry>), typeof(HsiAdiMarkersUserControl));
+          typeof(RoutedPropertyChangedEventHandler<Geometry>), typeof(HsiAdiMarkersUserControl));
 
         /// <summary>
         /// Raises the ValueChanged event.
         /// </summary>
         /// <param name="args">Arguments associated with the ValueChanged event.</param>
-        protected virtual void OnNav32DataValueChanged(RoutedPropertyChangedEventArgs<System.Windows.Media.Geometry> args)
+        protected virtual void OnNav32DataValueChanged(RoutedPropertyChangedEventArgs<Geometry> args)
         {
             RaiseEvent(args);
         }
@@ -5381,7 +5382,7 @@ namespace Dev.Sensors
           "Nav42NeedleLineThickness",
           typeof(double),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(2.0, new PropertyChangedCallback(OnNav42NeedleLineThicknessValueChanged)));
+                new FrameworkPropertyMetadata(2.0, OnNav42NeedleLineThicknessValueChanged));
 
 
         internal double Nav42NeedleLineThickness
@@ -5438,29 +5439,29 @@ namespace Dev.Sensors
         internal static readonly DependencyProperty Nav4DataProperty =
         DependencyProperty.RegisterAttached(
           "Nav4Data",
-          typeof(System.Windows.Media.Geometry),
+          typeof(Geometry),
           typeof(HsiAdiMarkersUserControl),
-                new FrameworkPropertyMetadata(null, new PropertyChangedCallback(OnNav4DataValueChanged)));
+                new FrameworkPropertyMetadata(null, OnNav4DataValueChanged));
 
 
-        internal System.Windows.Media.Geometry Nav4Data
+        internal Geometry Nav4Data
         {
-            get => (System.Windows.Media.Geometry)GetValue(Nav4DataProperty);
+            get => (Geometry)GetValue(Nav4DataProperty);
             set => SetValue(Nav4DataProperty, value);
         }
 
         /// <summary>
         /// Gets the Icon.
         /// </summary>
-        internal static System.Windows.Media.Geometry GetNav4Data(DependencyObject obj)
+        internal static Geometry GetNav4Data(DependencyObject obj)
         {
-            return (System.Windows.Media.Geometry)obj.GetValue(Nav4DataProperty);
+            return (Geometry)obj.GetValue(Nav4DataProperty);
         }
 
         /// <summary>
         /// Sets the Icon.
         /// </summary>
-        internal static void SetNav4Data(DependencyObject obj, System.Windows.Media.Geometry value)
+        internal static void SetNav4Data(DependencyObject obj, Geometry value)
         {
             obj.SetValue(Nav4DataProperty, value);
         }
@@ -5469,8 +5470,8 @@ namespace Dev.Sensors
         {
             var control = (HsiAdiMarkersUserControl)obj;
 
-            var e = new RoutedPropertyChangedEventArgs<System.Windows.Media.Geometry>(
-              (System.Windows.Media.Geometry)args.OldValue, (System.Windows.Media.Geometry)args.NewValue, Nav4DataValueChangedEvent);
+            var e = new RoutedPropertyChangedEventArgs<Geometry>(
+              (Geometry)args.OldValue, (Geometry)args.NewValue, Nav4DataValueChangedEvent);
 
             control.OnNav4DataValueChanged(e);
         }
@@ -5480,13 +5481,13 @@ namespace Dev.Sensors
         /// </summary>
         public static readonly RoutedEvent Nav4DataValueChangedEvent = EventManager.RegisterRoutedEvent(
           "Nav4DataValueChanged", RoutingStrategy.Bubble,
-          typeof(RoutedPropertyChangedEventHandler<System.Windows.Media.Geometry>), typeof(HsiAdiMarkersUserControl));
+          typeof(RoutedPropertyChangedEventHandler<Geometry>), typeof(HsiAdiMarkersUserControl));
 
         /// <summary>
         /// Raises the ValueChanged event.
         /// </summary>
         /// <param name="args">Arguments associated with the ValueChanged event.</param>
-        protected virtual void OnNav4DataValueChanged(RoutedPropertyChangedEventArgs<System.Windows.Media.Geometry> args)
+        protected virtual void OnNav4DataValueChanged(RoutedPropertyChangedEventArgs<Geometry> args)
         {
             RaiseEvent(args);
         }
@@ -5719,8 +5720,8 @@ namespace Dev.Sensors
         {
             var control = (HsiAdiMarkersUserControl)obj;
 
-            var e = new RoutedPropertyChangedEventArgs<System.Windows.Rect>(
-              (System.Windows.Rect)args.OldValue, (System.Windows.Rect)args.NewValue, CanvasRectValueChangedEvent);
+            var e = new RoutedPropertyChangedEventArgs<Rect>(
+              (Rect)args.OldValue, (Rect)args.NewValue, CanvasRectValueChangedEvent);
 
             control.OnCanvasRectValueChanged(e);
         }
@@ -7265,32 +7266,41 @@ namespace Dev.Sensors
 
         private void BorderTouchCanvas_OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (_dragStarted)
+            if (!_dragStarted) return;
+
+            var mousePoint = e.GetPosition(this);
+            var canvasWidth = borderTouchCanvas.Width;
+            var canvasHeight = borderTouchCanvas.Height;
+
+            Task.Run(() =>
             {
-                var mousePoint = e.GetPosition(this);
-                var new_angle = GetStartAngle(mousePoint, borderTouchCanvas);
-                _currentAngle = new_angle - _startAngle;
-                _currentAngle *= 180 / Math.PI;
-                _currentAngle += _totalAngle;
+                var startAngle = GetStartAngle(mousePoint, canvasWidth, canvasHeight);
+                var newAngle = startAngle - _startAngle;
+                newAngle *= 180 / Math.PI;
+                newAngle += _totalAngle;
 
-                if (_currentAngle < 359 && _currentAngle > -0)
+                if (newAngle is < 359 and > -0)
                 {
-                    var transformBorderTouchCanvas = new RotateTransform(_currentAngle, borderTouchCanvas.Width / 2, borderTouchCanvas.Height / 2);
-                    borderTouchCanvas.RenderTransform = transformBorderTouchCanvas;
-
-                    var transformPrimaryNeedle = new RotateTransform(_currentAngle, canvasPrimaryNeedle.Width / 2, canvasPrimaryNeedle.Height / 2);
-                    canvasPrimaryNeedle.RenderTransform = transformPrimaryNeedle;
-
-                    PrimaryNavCourse = transformBorderTouchCanvas.Angle;
-                    if (PrimaryNavCourse < 0)
+                    Dispatcher.Invoke(() =>
                     {
-                        PrimaryNavCourse += 360;
-                    }
+                        UpdateTransform(newAngle);
+                    });
                 }
-                else
-                {
-                    _currentAngle = 0;
-                }
+            });
+        }
+
+        private void UpdateTransform(double angle)
+        {
+            var transformBorderTouchCanvas = new RotateTransform(angle, borderTouchCanvas.Width / 2, borderTouchCanvas.Height / 2);
+            borderTouchCanvas.RenderTransform = transformBorderTouchCanvas;
+
+            var transformPrimaryNeedle = new RotateTransform(angle, canvasPrimaryNeedle.Width / 2, canvasPrimaryNeedle.Height / 2);
+            canvasPrimaryNeedle.RenderTransform = transformPrimaryNeedle;
+
+            PrimaryNavCourse = transformBorderTouchCanvas.Angle;
+            if (PrimaryNavCourse < 0)
+            {
+                PrimaryNavCourse += 360;
             }
         }
 
@@ -7305,13 +7315,17 @@ namespace Dev.Sensors
         {
             _dragStarted = true;
             var mousePoint = e.GetPosition(this);
-            _startAngle = GetStartAngle(mousePoint, borderTouchCanvas);
+
+            double canvasWidth = borderTouchCanvas.Width;
+            double canvasHeight = borderTouchCanvas.Height;
+
+            _startAngle = GetStartAngle(mousePoint, canvasWidth, canvasHeight);
         }
 
-        private double GetStartAngle(Point point, Canvas canvas)
+        private double GetStartAngle(Point point, double width, double height)
         {
-            double dx = point.X - canvas.Width / 2;
-            double dy = point.Y - canvas.Height / 2;
+            double dx = point.X - width / 2;
+            double dy = point.Y - height / 2;
             return Math.Atan2(dy, dx);
         }
 
